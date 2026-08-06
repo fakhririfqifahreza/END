@@ -1,0 +1,33 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class AdminUserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // Membuat user admin
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@cpm.com',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin',
+        ]);
+
+        // Membuat user pelanggan contoh
+        User::create([
+            'name' => 'Pelanggan Demo',
+            'email' => 'pelanggan@cpm.com',
+            'password' => Hash::make('pelanggan123'),
+            'role' => 'pelanggan',
+        ]);
+    }
+}
