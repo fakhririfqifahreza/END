@@ -8,43 +8,32 @@ use App\Models\Transaksi;
 
 class TransaksiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $transaksi = Transaksi::with('user')
-            ->orderBy('created_at', 'desc')
-            ->get();
-        
-        return view('admin.transaksi', compact('transaksi'));
-    }
+        $query = Transaksi::with(['transaksiDetail.barang', 'user'])
+            ->orderBy('created_at', 'desc');
 
-    // Update status transaksi
-    public function updateStatus(Request $request, $id)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,selesai,batal'
-        ]);
+        // 1. Filter Pencarian Teks (Kode Trx / Nama Pelanggan)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('kode_transaksi', 'like', "%{$search}%")
+                  ->orWhere('nama_pelanggan', 'like', "%{$search}%");
+            });
+        }
 
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->status = $request->status;
-        $transaksi->save();
+        // 2. Filter Rentang Tanggal
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
+        }
 
-        return redirect()->back()->with('success', 'Status transaksi berhasil diperbarui!');
-    }
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
 
-    // Check for new transactions (for real-time notification)
-    public function checkNewTransactions(Request $request)
-    {
-        $lastCheckTime = $request->input('last_check');
-        
-        $newTransactions = Transaksi::with('user')
-            ->where('created_at', '>', $lastCheckTime)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        
-        return response()->json([
-            'has_new' => $newTransactions->count() > 0,
-            'count' => $newTransactions->count(),
-            'transactions' => $newTransactions
-        ]);
+        // withQueryString() menjaga filter tetap aktif saat berpindah halaman paginasi
+        $transaksis = $query->paginate(15)->withQueryString();
+
+        return view('admin.transaksi.index', compact('transaksis'));
     }
 }

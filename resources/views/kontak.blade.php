@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <style>
@@ -8,7 +8,7 @@
     
     .contact-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(3, 172, 14, 0.2) !important;
+        box-shadow: 0 8px 25px rgba(85, 0, 0, 0.2) !important;
     }
     
     .contact-icon {
@@ -18,15 +18,15 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         color: white;
         font-size: 2rem;
         margin: 0 auto 1.5rem;
-        box-shadow: 0 4px 15px rgba(3, 172, 14, 0.3);
+        box-shadow: 0 4px 15px rgba(85, 0, 0, 0.3);
     }
     
     .contact-value {
-        color: #03AC0E;
+        color: #550000;
         font-weight: 600;
         font-size: 1.2rem;
     }
@@ -158,15 +158,15 @@
     }
 
     body.dark-mode .contact-card {
-        background: rgba(3, 172, 14, 0.1) !important;
+        background: rgba(85, 0, 0, 0.1) !important;
     }
 
     body.dark-mode .contact-value {
-        color: #03AC0E;
+        color: #550000;
     }
 
     body.dark-mode .text-success {
-        color: #03AC0E !important;
+        color: #550000 !important;
     }
 </style>
 
@@ -209,10 +209,10 @@
                                 </div>
                                 <h5 class="fw-bold mb-3">Jam Operasional</h5>
                                 <p class="text-secondary mb-2">
-                                    <strong>Minggu - Jumat:</strong><br>07.00 – 21.00 WIB
+                                    <strong>Minggu - Jumat:</strong><br>07.00 â€“ 21.00 WIB
                                 </p>
                                 <p class="text-secondary mb-3">
-                                    <strong>Sabtu:</strong><br>07.00 – 22.00 WIB
+                                    <strong>Sabtu:</strong><br>07.00 â€“ 22.00 WIB
                                 </p>
                                 <span class="badge bg-success px-3 py-2 rounded-pill">
                                     <i class="bi bi-check-circle-fill me-1"></i>Buka Sekarang
@@ -228,3 +228,4 @@
     </div>
 </div>
 @endsection
+

@@ -1,4 +1,4 @@
-@extends('layouts.auth-admin')
+﻿@extends('layouts.auth-admin')
 
 @section('title', 'Registrasi Admin - Warung Sembako CPM')
 
@@ -8,7 +8,7 @@
         <div class="auth-card">
             {{-- LOGO --}}
             <div class="text-center mb-4">
-                <img src="{{ asset('logo/logo 2.png') }}" alt="Logo CPM" class="logo-img">
+                <img src="{{ asset('logo/logo baru.jpeg') }}" alt="Logo CPM" class="logo-img">
                 <h2 class="fw-bold auth-title">Daftar Admin</h2>
                 <span class="admin-badge">Warung Sembako Cahaya Putri Maulana (CPM)</span>
             </div>
@@ -23,7 +23,7 @@
             {{-- FORM REGISTER --}}
             <form action="{{ route('admin.register.submit') }}" method="POST">
                 @csrf
-                
+
                 {{-- NAMA --}}
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Nama Lengkap</label>
@@ -31,7 +31,7 @@
                         <span class="input-icon">
                             <i class="bi bi-person"></i>
                         </span>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                placeholder="Masukkan nama lengkap" value="{{ old('name') }}" required autofocus>
                     </div>
                     @error('name')
@@ -46,7 +46,7 @@
                         <span class="input-icon">
                             <i class="bi bi-envelope"></i>
                         </span>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                placeholder="Masukkan email admin" value="{{ old('email') }}" required>
                     </div>
                     @error('email')
@@ -61,7 +61,7 @@
                         <span class="input-icon">
                             <i class="bi bi-lock"></i>
                         </span>
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" 
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                                placeholder="Minimal 6 karakter" required>
                     </div>
                     @error('password')
@@ -76,7 +76,7 @@
                         <span class="input-icon">
                             <i class="bi bi-lock-fill"></i>
                         </span>
-                        <input type="password" name="password_confirmation" class="form-control" 
+                        <input type="password" name="password_confirmation" class="form-control"
                                placeholder="Ulangi password Anda" required>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
     }
 
     .auth-title {
-        color: #03AC0E;
+        color: #550000;
         font-size: 1.75rem;
     }
 
@@ -173,3 +173,4 @@
 </style>
 @endpush
 @endsection
+

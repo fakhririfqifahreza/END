@@ -1,10 +1,10 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="page-header mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <h2 class="fw-bold" style="color: #03AC0E;">Mengelola Produk</h2>
+            <h2 class="fw-bold" style="color: #550000;">Mengelola Produk</h2>
             <button class="btn btn-success btn-add-product" data-bs-toggle="modal" data-bs-target="#modalTambahProduk">
                 <i class="bi bi-plus-circle me-2 me-md-2 me-sm-0"></i><span class="d-none d-md-inline">Tambah Produk</span>
             </button>
@@ -76,7 +76,7 @@
                             <div class="modal fade" id="modalEdit{{ $item->id_barang }}" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <div class="modal-header" style="background: #03AC0E; color: white;">
+                                        <div class="modal-header" style="background: #550000; color: white;">
                                             <h5 class="modal-title"><i class="bi bi-pencil me-2"></i>Edit Produk</h5>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                         </div>
@@ -141,7 +141,7 @@
 <div class="modal fade" id="modalTambahProduk" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header" style="background: #03AC0E; color: white;">
+            <div class="modal-header" style="background: #550000; color: white;">
                 <h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>Tambah Produk Baru</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -221,8 +221,8 @@
     }
 
     .form-control:focus {
-        border-color: #03AC0E;
-        box-shadow: 0 0 0 0.2rem rgba(3, 172, 14, 0.15);
+        border-color: #550000;
+        box-shadow: 0 0 0 0.2rem rgba(85, 0, 0, 0.15);
     }
 
     .table th {
@@ -268,19 +268,19 @@
 
     body.dark-mode .form-control {
         background: #1a1a2e;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
         color: #e5e7eb;
     }
 
     body.dark-mode .form-control:focus {
         background: #1a1a2e;
-        border-color: #03AC0E;
+        border-color: #550000;
         color: #e5e7eb;
     }
 
     body.dark-mode .input-group-text {
         background: #1a1a2e;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
         color: #e5e7eb;
     }
 
@@ -576,3 +576,4 @@
 </script>
 @endpush
 @endsection
+

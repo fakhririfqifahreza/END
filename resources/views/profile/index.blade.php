@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <div class="profile-container">
@@ -105,7 +105,7 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" id="searchTransaksi" 
-                                                   placeholder="🔍 Cari berdasarkan ID, nama pembeli, atau metode pembayaran...">
+                                                   placeholder="ðŸ” Cari berdasarkan ID, nama pembeli, atau metode pembayaran...">
                                         </div>
                                         <div class="col-md-3">
                                             <select class="form-control" id="filterMetode">
@@ -290,13 +290,13 @@
     /* ===== PROFILE SIDEBAR ===== */
     body.dark-mode .profile-sidebar {
         background: rgba(20, 20, 30, 0.95);
-        border: 2px solid rgba(3, 172, 14, 0.3);
+        border: 2px solid rgba(85, 0, 0, 0.3);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     body.light-mode .profile-sidebar {
         background: rgba(255, 255, 255, 0.95);
-        border: 2px solid rgba(3, 172, 14, 0.3);
+        border: 2px solid rgba(85, 0, 0, 0.3);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
@@ -313,14 +313,14 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0 auto;
         font-size: 60px;
         color: white;
-        box-shadow: 0 5px 20px rgba(3, 172, 14, 0.4);
+        box-shadow: 0 5px 20px rgba(85, 0, 0, 0.4);
     }
 
     body.dark-mode .profile-avatar h5 {
@@ -347,7 +347,7 @@
 
     .role-badge {
         display: inline-block;
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         color: white;
         padding: 5px 15px;
         border-radius: 20px;
@@ -370,9 +370,9 @@
     }
 
     body.light-mode .profile-menu .menu-item {
-        background: rgba(3, 172, 14, 0.05);
+        background: rgba(85, 0, 0, 0.05);
         color: #1a1a2e;
-        border: 1px solid rgba(3, 172, 14, 0.1);
+        border: 1px solid rgba(85, 0, 0, 0.1);
     }
 
     .profile-menu .menu-item {
@@ -387,21 +387,21 @@
     }
 
     body.dark-mode .profile-menu .menu-item:hover {
-        background: rgba(3, 172, 14, 0.1);
-        border-color: rgba(3, 172, 14, 0.5);
+        background: rgba(85, 0, 0, 0.1);
+        border-color: rgba(85, 0, 0, 0.5);
         transform: translateX(5px);
     }
 
     body.light-mode .profile-menu .menu-item:hover {
-        background: rgba(3, 172, 14, 0.15);
-        border-color: rgba(3, 172, 14, 0.4);
+        background: rgba(85, 0, 0, 0.15);
+        border-color: rgba(85, 0, 0, 0.4);
         transform: translateX(5px);
     }
 
     .profile-menu .menu-item.active {
-        background: linear-gradient(135deg, #03AC0E, #02d115) !important;
-        border-color: #03AC0E !important;
-        box-shadow: 0 5px 15px rgba(3, 172, 14, 0.3);
+        background: linear-gradient(135deg, #550000, #3d0000) !important;
+        border-color: #550000 !important;
+        box-shadow: 0 5px 15px rgba(85, 0, 0, 0.3);
         color: white !important;
     }
 
@@ -412,13 +412,13 @@
     /* ===== PROFILE CONTENT CARD ===== */
     body.dark-mode .profile-content-card {
         background: rgba(20, 20, 30, 0.95);
-        border: 2px solid rgba(3, 172, 14, 0.3);
+        border: 2px solid rgba(85, 0, 0, 0.3);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     body.light-mode .profile-content-card {
         background: rgba(255, 255, 255, 0.95);
-        border: 2px solid rgba(3, 172, 14, 0.3);
+        border: 2px solid rgba(85, 0, 0, 0.3);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
@@ -439,7 +439,7 @@
     }
 
     .profile-content-card .card-header {
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         padding: 25px 30px;
         color: white;
     }
@@ -475,13 +475,13 @@
 
     body.dark-mode .form-control {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
         color: #fff;
     }
 
     body.light-mode .form-control {
         background: rgba(255, 255, 255, 1);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
         color: #1a1a2e;
     }
 
@@ -501,16 +501,16 @@
 
     body.dark-mode .form-control:focus {
         background: rgba(255, 255, 255, 0.08);
-        border-color: #03AC0E;
+        border-color: #550000;
         color: #fff;
-        box-shadow: 0 0 0 0.2rem rgba(3, 172, 14, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(85, 0, 0, 0.25);
     }
 
     body.light-mode .form-control:focus {
         background: #fff;
-        border-color: #03AC0E;
+        border-color: #550000;
         color: #1a1a2e;
-        box-shadow: 0 0 0 0.2rem rgba(3, 172, 14, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(85, 0, 0, 0.25);
     }
 
     body.dark-mode .form-control:disabled {
@@ -535,7 +535,7 @@
 
     /* ===== BUTTONS ===== */
     .btn-primary {
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         border: none;
         padding: 12px 30px;
         border-radius: 8px;
@@ -546,7 +546,7 @@
 
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 20px rgba(3, 172, 14, 0.4);
+        box-shadow: 0 5px 20px rgba(85, 0, 0, 0.4);
         color: white;
     }
 
@@ -588,12 +588,12 @@
 
     body.dark-mode .order-item {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
     }
 
     body.light-mode .order-item {
         background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
     }
 
     .order-item {
@@ -604,12 +604,12 @@
 
     body.dark-mode .order-item:hover {
         background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(3, 172, 14, 0.5);
+        border-color: rgba(85, 0, 0, 0.5);
     }
 
     body.light-mode .order-item:hover {
         background: rgba(255, 255, 255, 1);
-        border-color: rgba(3, 172, 14, 0.5);
+        border-color: rgba(85, 0, 0, 0.5);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
@@ -630,7 +630,7 @@
     }
 
     .order-id {
-        color: #03AC0E;
+        color: #550000;
         font-weight: 700;
         font-size: 16px;
         margin-right: 15px;
@@ -669,12 +669,12 @@
 
     body.dark-mode .info-item {
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(3, 172, 14, 0.2);
+        border: 1px solid rgba(85, 0, 0, 0.2);
     }
 
     body.light-mode .info-item {
-        background: rgba(3, 172, 14, 0.05);
-        border: 1px solid rgba(3, 172, 14, 0.2);
+        background: rgba(85, 0, 0, 0.05);
+        border: 1px solid rgba(85, 0, 0, 0.2);
     }
 
     .info-item {
@@ -717,12 +717,12 @@
 
     body.dark-mode .payment-details {
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(3, 172, 14, 0.2);
+        border: 1px solid rgba(85, 0, 0, 0.2);
     }
 
     body.light-mode .payment-details {
-        background: rgba(3, 172, 14, 0.05);
-        border: 1px solid rgba(3, 172, 14, 0.2);
+        background: rgba(85, 0, 0, 0.05);
+        border: 1px solid rgba(85, 0, 0, 0.2);
     }
 
     .payment-details {
@@ -770,8 +770,8 @@
 
     .btn-outline-primary {
         background: transparent;
-        border: 1px solid #03AC0E;
-        color: #03AC0E;
+        border: 1px solid #550000;
+        color: #550000;
         padding: 8px 16px;
         border-radius: 6px;
         font-size: 14px;
@@ -780,7 +780,7 @@
     }
 
     .btn-outline-primary:hover {
-        background: #03AC0E;
+        background: #550000;
         color: #fff;
         transform: translateY(-2px);
     }
@@ -818,7 +818,7 @@
 
     .empty-state i {
         font-size: 80px;
-        color: rgba(3, 172, 14, 0.3);
+        color: rgba(85, 0, 0, 0.3);
         margin-bottom: 20px;
     }
 
@@ -843,9 +843,9 @@
     }
 
     .alert-success {
-        background: rgba(3, 172, 14, 0.2);
-        color: #03AC0E;
-        border: 1px solid rgba(3, 172, 14, 0.5);
+        background: rgba(85, 0, 0, 0.2);
+        color: #550000;
+        border: 1px solid rgba(85, 0, 0, 0.5);
     }
 
     .alert-danger {
@@ -855,7 +855,7 @@
     }
 
     body.light-mode .alert-success {
-        background: rgba(3, 172, 14, 0.15);
+        background: rgba(85, 0, 0, 0.15);
         color: #02a00c;
     }
 
@@ -874,12 +874,12 @@
 
     body.dark-mode .stat-card {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
     }
 
     body.light-mode .stat-card {
         background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
     }
 
     .stat-card {
@@ -892,14 +892,14 @@
     }
 
     body.dark-mode .stat-card:hover {
-        background: rgba(3, 172, 14, 0.1);
-        border-color: rgba(3, 172, 14, 0.5);
+        background: rgba(85, 0, 0, 0.1);
+        border-color: rgba(85, 0, 0, 0.5);
         transform: translateY(-5px);
     }
 
     body.light-mode .stat-card:hover {
         background: rgba(255, 255, 255, 1);
-        border-color: rgba(3, 172, 14, 0.5);
+        border-color: rgba(85, 0, 0, 0.5);
         transform: translateY(-5px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
@@ -908,7 +908,7 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -949,12 +949,12 @@
     /* ===== FILTER SECTION ===== */
     body.dark-mode .filter-section {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
     }
 
     body.light-mode .filter-section {
         background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
     }
 
     .filter-section {
@@ -1073,3 +1073,4 @@
     });
 </script>
 @endsection
+

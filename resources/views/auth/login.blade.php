@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <div class="container my-5 py-4">
@@ -7,15 +7,15 @@
             <div class="auth-card">
                 {{-- LOGO --}}
                 <div class="text-center mb-4">
-                    <img src="{{ asset('logo/logo 2.png') }}" alt="Logo CPM" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 1rem;">
-                    <h2 class="fw-bold" style="color: #03AC0E;">Login</h2>
+                    <img src="{{ asset('logo/logo baru.jpeg') }}" alt="Logo CPM" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 1rem;">
+                    <h2 class="fw-bold" style="color: #550000;">Login</h2>
                     <p class="text-muted">Warung Sembako Cahaya Putri Maulana (CPM)</p>
                 </div>
 
                 {{-- FORM LOGIN --}}
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
-                    
+
                     {{-- EMAIL --}}
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Email</label>
@@ -23,14 +23,29 @@
                             <span class="input-icon">
                                 <i class="bi bi-envelope"></i>
                             </span>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                    placeholder="Masukkan email Anda" value="{{ old('email') }}" required>
                         </div>
                         @error('email')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const alertBox = document.querySelector('.alert-fixed');
+                            if (alertBox) {
+                                // Menunggu 2 detik sebelum mulai menghilang
+                                setTimeout(() => {
+                                    alertBox.style.transition = 'all 0.4s ease';
+                                    alertBox.style.opacity = '0';
+                                    alertBox.style.transform = 'translateX(60px)';
 
+                                    // Hapus elemen dari halaman setelah animasi selesai
+                                    setTimeout(() => alertBox.remove(), 400);
+                                }, 2000); // 2000 ms = 2 detik
+                            }
+                        });
+                    </script>
                     {{-- PASSWORD --}}
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Password</label>
@@ -38,7 +53,7 @@
                             <span class="input-icon">
                                 <i class="bi bi-lock"></i>
                             </span>
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" 
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                                    placeholder="Masukkan password Anda" required>
                         </div>
                         @error('password')
@@ -98,8 +113,8 @@
     }
 
     .form-control:focus {
-        border-color: #03AC0E;
-        box-shadow: 0 0 0 4px rgba(3, 172, 14, 0.1);
+        border-color: #550000;
+        box-shadow: 0 0 0 4px rgba(85, 0, 0, 0.1);
     }
 
     .form-control.is-invalid {
@@ -109,37 +124,37 @@
     .btn-login {
         width: 100%;
         padding: 0.85rem;
-        background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%);
+        background: linear-gradient(135deg, #550000 0%, #3d0000 100%);
         color: white;
         border: none;
         border-radius: 10px;
         font-weight: 600;
         font-size: 1rem;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(3, 172, 14, 0.3);
+        box-shadow: 0 4px 12px rgba(85, 0, 0, 0.3);
     }
 
     .btn-login:hover {
-        background: linear-gradient(135deg, #028A0F 0%, #026D0B 100%);
+        background: linear-gradient(135deg, #3d0000 0%, #026D0B 100%);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(3, 172, 14, 0.4);
+        box-shadow: 0 6px 20px rgba(85, 0, 0, 0.4);
     }
 
     .link-register {
-        color: #03AC0E;
+        color: #550000;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
     }
 
     .link-register:hover {
-        color: #028A0F;
+        color: #3d0000;
         text-decoration: underline;
     }
 
     .form-check-input:checked {
-        background-color: #03AC0E;
-        border-color: #03AC0E;
+        background-color: #550000;
+        border-color: #550000;
     }
 
     /* Dark Mode */
@@ -149,7 +164,7 @@
 
     body.dark-mode .form-control {
         background: #1a1a2e;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
         color: #e5e7eb;
     }
 
@@ -159,7 +174,7 @@
 
     body.dark-mode .form-control:focus {
         background: #1a1a2e;
-        border-color: #03AC0E;
+        border-color: #550000;
         color: #e5e7eb;
     }
 
@@ -168,3 +183,4 @@
     }
 </style>
 @endsection
+

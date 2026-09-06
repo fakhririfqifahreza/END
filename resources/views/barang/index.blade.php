@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <style>
@@ -15,7 +15,7 @@
 
     .page-header h2 {
         font-weight: 700;
-        color: #03AC0E;
+        color: #550000;
     }
 
     /* ===== Search Bar di Halaman Produk ===== */
@@ -41,8 +41,8 @@
 
     .search-form-produk input:focus {
         outline: none;
-        border-color: #03AC0E;
-        box-shadow: 0 0 0 3px rgba(3, 172, 14, 0.1);
+        border-color: #550000;
+        box-shadow: 0 0 0 3px rgba(85, 0, 0, 0.1);
     }
 
     .search-form-produk button {
@@ -51,7 +51,7 @@
         top: 0;
         height: 100%;
         padding: 0 1.2rem;
-        background: #03AC0E;
+        background: #550000;
         color: white;
         border: none;
         border-radius: 0 8px 8px 0;
@@ -60,7 +60,7 @@
     }
 
     .search-form-produk button:hover {
-        background: #028A0F;
+        background: #3d0000;
     }
 
     /* HIDE search container di desktop (gunakan search di navbar) */
@@ -88,20 +88,20 @@
     }
 
     .btn-add {
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         color: #fff;
         border-radius: 50px;
         padding: 12px 22px;
         border: none;
-        box-shadow: 0 4px 15px rgba(3, 172, 14, 0.3);
+        box-shadow: 0 4px 15px rgba(85, 0, 0, 0.3);
         transition: 0.3s;
         font-weight: 600;
     }
 
     .btn-add:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(3, 172, 14, 0.5);
-        background: linear-gradient(135deg, #02d115, #03AC0E);
+        box-shadow: 0 8px 25px rgba(85, 0, 0, 0.5);
+        background: linear-gradient(135deg, #3d0000, #550000);
     }
 
     /* ===== Product Card ===== */
@@ -116,8 +116,8 @@
 
     .product-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 25px 50px rgba(3, 172, 14, 0.25);
-        border-color: #03AC0E;
+        box-shadow: 0 25px 50px rgba(85, 0, 0, 0.25);
+        border-color: #550000;
         z-index: 10;
     }
 
@@ -201,8 +201,8 @@
     }
 
     .card-body .btn-outline-success {
-        border-color: #03AC0E;
-        color: #03AC0E;
+        border-color: #550000;
+        color: #550000;
         font-weight: 600;
         background: transparent;
         transition: all 0.3s ease;
@@ -211,15 +211,15 @@
     }
 
     .card-body .btn-outline-success:hover {
-        background: linear-gradient(135deg, #03AC0E, #02d115);
-        border-color: #03AC0E;
+        background: linear-gradient(135deg, #550000, #3d0000);
+        border-color: #550000;
         color: #fff;
-        box-shadow: 0 4px 15px rgba(3, 172, 14, 0.5);
+        box-shadow: 0 4px 15px rgba(85, 0, 0, 0.5);
         transform: translateY(-2px);
     }
 
     .text-success {
-        color: #03AC0E !important;
+        color: #550000 !important;
         font-size: 0.95rem;
     }
 
@@ -230,7 +230,7 @@
     /* ===== Modal Light Theme ===== */
     .modal-content {
         background: #ffffff;
-        border: 1px solid rgba(3, 172, 14, 0.3);
+        border: 1px solid rgba(85, 0, 0, 0.3);
         color: #212529;
     }
 
@@ -239,7 +239,7 @@
     }
 
     .modal-title {
-        color: #03AC0E;
+        color: #550000;
     }
 
     .modal-footer {
@@ -258,8 +258,8 @@
 
     .form-control:focus {
         background: #ffffff;
-        border-color: #03AC0E;
-        box-shadow: 0 0 10px rgba(3, 172, 14, 0.2);
+        border-color: #550000;
+        box-shadow: 0 0 10px rgba(85, 0, 0, 0.2);
         color: #212529;
     }
 
@@ -278,7 +278,7 @@
         background: #ffffff;
         color: #2d3748;
         border: 1px solid rgba(0, 0, 0, 0.1);
-        border-left: 4px solid #03AC0E;
+        border-left: 4px solid #550000;
         border-radius: 8px;
         padding: 1rem 1.5rem;
         font-weight: 500;
@@ -292,16 +292,16 @@
 
     .alert-fixed i {
         font-size: 1.4rem;
-        color: #03AC0E;
+        color: #550000;
     }
 
     @keyframes slideInRight {
-        from { 
-            opacity: 0; 
+        from {
+            opacity: 0;
             transform: translateX(100px);
         }
-        to { 
-            opacity: 1; 
+        to {
+            opacity: 1;
             transform: translateX(0);
         }
     }
@@ -453,10 +453,10 @@
     {{-- SEARCH BAR --}}
     <div class="search-container">
         <form class="search-form-produk" id="searchFormMobile">
-            <input type="text" 
-                   name="search" 
-                   id="searchInputMobile" 
-                   placeholder="Cari produk di CPM..." 
+            <input type="text"
+                   name="search"
+                   id="searchInputMobile"
+                   placeholder="Cari produk di CPM..."
                    value="{{ request('search') }}">
             <button type="submit">
                 <i class="bi bi-search"></i>
@@ -467,7 +467,7 @@
     {{-- Notifikasi sudah ditangani oleh app.blade.php, jadi hapus dari sini --}}
 
     {{-- Toolbar dengan tombol Tambah Produk dihilangkan --}}
-    {{-- 
+    {{--
     <div class="toolbar">
         <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modalTambahProduk">
             + Tambah Produk
@@ -507,23 +507,11 @@
                             </p>
                         </div>
                         
-                        {{-- Tombol Edit Produk dihilangkan sementara --}}
-                        {{-- 
-                        <div class="admin-controls mb-2">
-                            <button type="button" 
-                                    class="btn btn-warning btn-sm rounded-pill w-100" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalEditStok{{ $item->id_barang }}"
-                                    style="font-size: 0.8rem; padding: 6px 14px;">
-                                <i class="bi bi-pencil"></i> Edit Produk
-                            </button>
-                        </div>
-                        --}}
-                        
+
                         @auth
                             <form action="{{ route('keranjang.tambah', ['id' => $item->id_barang]) }}" method="POST" class="mt-auto">
                                 @csrf
-                                <button type="submit" 
+                                <button type="submit"
                                         class="btn btn-outline-success w-100 rounded-pill btn-sm"
                                         {{ $stokHabis ? 'disabled' : '' }}>
                                     {{ $stokHabis ? 'Stok Habis' : 'Keranjang' }}
@@ -537,7 +525,7 @@
                     </div>
                 </div>
             </div>
-            
+
             {{-- Modal Edit Stok --}}
             <div class="modal fade" id="modalEditStok{{ $item->id_barang }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -554,10 +542,10 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold text-success">Nama Produk <span class="text-danger">*</span></label>
-                                    <input type="text" 
+                                    <input type="text"
                                            name="nama_barang"
-                                           class="form-control form-control-lg" 
-                                           value="{{ $item->nama_barang }}" 
+                                           class="form-control form-control-lg"
+                                           value="{{ $item->nama_barang }}"
                                            required>
                                 </div>
 
@@ -565,20 +553,20 @@
                                 <div class="mb-3">
                                     <label class="form-label fw-bold text-success">Gambar Produk</label>
                                     <div class="text-center mb-2">
-                                        <img src="{{ $item->gambar_barang ? asset('storage/gambar/'.$item->gambar_barang) : asset('noimage.jpg') }}" 
-                                             alt="{{ $item->nama_barang }}" 
+                                        <img src="{{ $item->gambar_barang ? asset('storage/gambar/'.$item->gambar_barang) : asset('noimage.jpg') }}"
+                                             alt="{{ $item->nama_barang }}"
                                              class="img-thumbnail"
                                              id="previewImg{{ $item->id_barang }}"
                                              style="max-height: 150px; object-fit: cover; border-radius: 12px;">
                                     </div>
-                                    <input type="file" 
-                                           name="gambar_barang" 
-                                           class="form-control" 
+                                    <input type="file"
+                                           name="gambar_barang"
+                                           class="form-control"
                                            accept="image/*"
                                            onchange="previewImage(event, {{ $item->id_barang }})">
                                     <small class="text-muted">Pilih gambar baru jika ingin mengubah gambar produk</small>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -593,29 +581,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <hr style="border-color: rgba(3, 172, 14, 0.3); margin: 20px 0;">
-                                
+
+                                <hr style="border-color: rgba(85, 0, 0, 0.3); margin: 20px 0;">
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label fw-bold text-success">Stok Baru <span class="text-danger">*</span></label>
-                                            <input type="text" 
-                                                   name="stok_barang" 
-                                                   class="form-control form-control-lg" 
-                                                   placeholder="Contoh: 50 kg" 
+                                            <input type="text"
+                                                   name="stok_barang"
+                                                   class="form-control form-control-lg"
+                                                   placeholder="Contoh: 50 kg"
                                                    value="{{ $item->stok_barang }}"
                                                    required>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label fw-bold text-success">Harga Baru <span class="text-danger">*</span></label>
-                                            <input type="number" 
-                                                   name="harga_barang" 
-                                                   class="form-control form-control-lg" 
-                                                   placeholder="Contoh: 15000" 
+                                            <input type="number"
+                                                   name="harga_barang"
+                                                   class="form-control form-control-lg"
+                                                   placeholder="Contoh: 15000"
                                                    value="{{ $item->harga_barang }}"
                                                    required>
                                         </div>
@@ -624,7 +612,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-success rounded-pill px-4" style="background: linear-gradient(135deg, #03AC0E, #02d115); border: none;">
+                                <button type="submit" class="btn btn-success rounded-pill px-4" style="background: linear-gradient(135deg, #550000, #3d0000); border: none;">
                                     <i class="bi bi-check-circle"></i> SIMPAN
                                 </button>
                             </div>
@@ -671,7 +659,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success rounded-pill px-4" style="background: linear-gradient(135deg, #03AC0E, #02d115); border: none; box-shadow: 0 4px 15px rgba(3, 172, 14, 0.5);">Simpan Produk</button>
+                    <button type="submit" class="btn btn-success rounded-pill px-4" style="background: linear-gradient(135deg, #550000, #3d0000); border: none; box-shadow: 0 4px 15px rgba(85, 0, 0, 0.5);">Simpan Produk</button>
                 </div>
             </form>
         </div>
@@ -683,25 +671,25 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        console.log('✅ jQuery berhasil dimuat');
+        console.log('âœ… jQuery berhasil dimuat');
 
         // AJAX untuk tambah ke keranjang tanpa redirect
         $(document).on('submit', 'form[action*="keranjang/tambah"]', function(e) {
             e.preventDefault();
-            
+
             var form = $(this);
             var url = form.attr('action');
             var button = form.find('button[type="submit"]');
             var originalText = button.html();
-            
+
             // Cek jika button disabled (stok habis)
             if (button.prop('disabled')) {
                 return false;
             }
-            
+
             // Disable button dan ubah text
             button.prop('disabled', true).html('Menambah...');
-            
+
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -714,30 +702,30 @@
                     if (response.cart_count !== undefined && typeof window.updateCartBadge === 'function') {
                         window.updateCartBadge(response.cart_count);
                     }
-                    
+
                     // Tampilkan notifikasi
                     showNotification(response.message, 'success');
-                    
+
                     // Kembalikan tombol ke keadaan semula
                     button.prop('disabled', false).html(originalText);
-                    
+
                     // REDIRECT DIHAPUS - Tidak ada redirect ke halaman keranjang
                 },
                 error: function(xhr) {
                     console.error('Error:', xhr);
-                    
+
                     // Jika status 401 atau 419 (Unauthenticated), redirect langsung ke login
                     if (xhr.status === 401 || xhr.status === 419) {
                         window.location.href = "{{ route('login') }}";
                         return;
                     }
-                    
+
                     var errorMessage = 'Gagal menambahkan ke keranjang!';
-                    
+
                     if (xhr.responseJSON && xhr.responseJSON.message) {
                         errorMessage = xhr.responseJSON.message;
                     }
-                    
+
                     showNotification(errorMessage, 'error');
                     button.prop('disabled', false).html(originalText);
                 }
@@ -748,7 +736,7 @@
         function showNotification(message, type = 'success') {
             var iconClass = 'bi-check-circle-fill';
             var alertClass = 'alert-success';
-            
+
             if (type === 'error') {
                 iconClass = 'bi-x-circle-fill';
                 alertClass = 'alert-error';
@@ -756,10 +744,10 @@
                 iconClass = 'bi-exclamation-triangle-fill';
                 alertClass = 'alert-warning';
             }
-            
+
             var notification = $('<div class="alert-fixed ' + alertClass + '"><i class="bi ' + iconClass + '"></i><div class="alert-fixed-text">' + message + '</div></div>');
             $('body').append(notification);
-            
+
             setTimeout(function() {
                 notification.css({
                     'transition': 'opacity 0.5s ease',
@@ -773,14 +761,14 @@
 
         // Fungsi untuk melakukan pencarian
         function performSearch(query) {
-            console.log('🔍 Mencari:', query);
-            
+            console.log('ðŸ” Mencari:', query);
+
             $.ajax({
                 url: "{{ route('produk.search') }}",
                 type: "GET",
                 data: { query: query },
                 success: function (data) {
-                    console.log('✅ Data ditemukan:', data.length);
+                    console.log('âœ… Data ditemukan:', data.length);
                     console.log('Data:', data); // Debug: lihat data yang dikembalikan
                     $('#produk-list').html('');
 
@@ -788,7 +776,7 @@
                         $.each(data, function (index, item) {
                             // Debug: log gambar untuk setiap item
                             console.log('Gambar item:', item.gambar_barang);
-                            
+
                             // Cek stok habis
                             var stokMatch = item.stok_barang.match(/^(\d+(?:\.\d+)?)/);
                             var stokAngka = stokMatch ? parseFloat(stokMatch[1]) : 0;
@@ -798,7 +786,7 @@
                             var stokTextClass = stokHabis ? 'text-danger fw-bold' : '';
                             var buttonDisabled = stokHabis ? 'disabled' : '';
                             var buttonText = stokHabis ? 'Stok Habis' : 'Keranjang';
-                            
+
                             // Generate image URL - PERBAIKAN PATH
                             var imageUrl;
                             if (item.gambar_barang && item.gambar_barang != null && item.gambar_barang != '') {
@@ -806,9 +794,9 @@
                             } else {
                                 imageUrl = '{{ asset("noimage.jpg") }}';
                             }
-                            
+
                             console.log('Image URL:', imageUrl); // Debug URL gambar
-                            
+
                             $('#produk-list').append(`
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-3">
                                     <div class="card product-card shadow-sm border-0 rounded-4 h-100 ${stokHabisClass}">
@@ -844,7 +832,7 @@
                     }
                 },
                 error: function (xhr) {
-                    console.error('❌ Gagal ambil data:', xhr.responseText);
+                    console.error('âŒ Gagal ambil data:', xhr.responseText);
                     console.error('Status:', xhr.status);
                     console.error('Error:', xhr.statusText);
                 }
@@ -896,3 +884,4 @@
     }
 </script>
 @endpush
+

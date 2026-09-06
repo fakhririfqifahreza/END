@@ -1,6 +1,10 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
+@php
+    $currentUser = auth()->user();
+    $roleLabel = $currentUser?->isOwner() ? 'Pemilik Warung' : 'Admin';
+@endphp
 <div class="settings-container">
     <div class="container py-5">
         <div class="settings-card">
@@ -39,21 +43,21 @@
                         <i class="bi bi-person-fill setting-icon"></i>
                         <div>
                             <h5>Informasi Akun</h5>
-                            <p>Lihat dan kelola informasi akun Anda</p>
+                            <p>Lihat dan kelola informasi akun Anda sebagai admin atau pemilik warung</p>
                         </div>
                     </div>
                     <div class="account-info-box">
                         <div class="info-row">
                             <span class="info-label">Nama:</span>
-                            <span class="info-value">Admin CPM</span>
+                            <span class="info-value">{{ $currentUser?->name }}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Email:</span>
-                            <span class="info-value">admin@cpm.com</span>
+                            <span class="info-value">{{ $currentUser?->email }}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Role:</span>
-                            <span class="info-value role-badge">Admin</span>
+                            <span class="info-value role-badge">{{ $roleLabel }}</span>
                         </div>
                     </div>
                 </div>
@@ -80,7 +84,7 @@
     }
 
     .settings-header {
-        background: linear-gradient(135deg, #03AC0E, #02d115);
+        background: linear-gradient(135deg, #550000, #3d0000);
         padding: 30px;
         display: flex;
         align-items: center;
@@ -119,7 +123,7 @@
 
     .setting-icon {
         font-size: 2rem;
-        color: #03AC0E;
+        color: #550000;
         margin-top: 5px;
     }
 
@@ -165,14 +169,14 @@
     }
 
     .theme-btn:hover {
-        color: #03AC0E;
+        color: #550000;
         transform: translateY(-2px);
     }
 
     .theme-btn.active {
-        background: #03AC0E;
+        background: #550000;
         color: #fff;
-        box-shadow: 0 4px 15px rgba(3, 172, 14, 0.3);
+        box-shadow: 0 4px 15px rgba(85, 0, 0, 0.3);
     }
 
     .setting-divider {
@@ -211,7 +215,7 @@
     }
 
     .role-badge {
-        background: #03AC0E;
+        background: #550000;
         padding: 4px 12px;
         border-radius: 15px;
         font-size: 0.9rem;
@@ -223,21 +227,21 @@
         align-items: center;
         gap: 8px;
         padding: 10px 24px;
-        background: #03AC0E;
+        background: #550000;
         color: #fff;
         border: none;
         border-radius: 8px;
         text-decoration: none;
         font-weight: 600;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(3, 172, 14, 0.2);
+        box-shadow: 0 2px 8px rgba(85, 0, 0, 0.2);
     }
 
     .btn-custom-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(3, 172, 14, 0.3);
+        box-shadow: 0 4px 12px rgba(85, 0, 0, 0.3);
         color: #fff;
-        background: #028A0F;
+        background: #3d0000;
     }
 
     /* Dark Mode Styles */
@@ -247,7 +251,7 @@
 
     body.dark-mode .settings-card {
         background: #16213e;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
     }
 
     body.dark-mode .setting-info h5 {
@@ -259,8 +263,8 @@
     }
 
     body.dark-mode .theme-toggle {
-        background: rgba(3, 172, 14, 0.1);
-        border-color: rgba(3, 172, 14, 0.3);
+        background: rgba(85, 0, 0, 0.1);
+        border-color: rgba(85, 0, 0, 0.3);
     }
 
     body.dark-mode .theme-btn {
@@ -268,7 +272,7 @@
     }
 
     body.dark-mode .theme-btn:hover {
-        color: #03AC0E;
+        color: #550000;
     }
 
     body.dark-mode .setting-divider {
@@ -276,8 +280,8 @@
     }
 
     body.dark-mode .account-info-box {
-        background: rgba(3, 172, 14, 0.1);
-        border-color: rgba(3, 172, 14, 0.3);
+        background: rgba(85, 0, 0, 0.1);
+        border-color: rgba(85, 0, 0, 0.3);
     }
 
     body.dark-mode .info-label {
@@ -356,3 +360,4 @@
     });
 </script>
 @endsection
+

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <style>
@@ -14,7 +14,7 @@
     }
     
     .about-section strong {
-        color: #03AC0E;
+        color: #550000;
         font-weight: 600;
     }
 
@@ -108,7 +108,7 @@
     }
 
     body.dark-mode .about-section strong {
-        color: #03AC0E;
+        color: #550000;
     }
 </style>
 
@@ -149,3 +149,4 @@
     </div>
 </div>
 @endsection
+

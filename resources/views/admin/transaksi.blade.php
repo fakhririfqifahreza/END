@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="page-header mb-4">
-        <h2 class="fw-bold" style="color: #03AC0E;">Mengelola Transaksi</h2>
+        <h2 class="fw-bold" style="color: #550000;">Mengelola Transaksi</h2>
     </div>
 
     {{-- TABLE TRANSAKSI --}}
@@ -109,7 +109,7 @@
         <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header" style="background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%);">
+                    <div class="modal-header" style="background: linear-gradient(135deg, #550000 0%, #3d0000 100%);">
                         <h5 class="modal-title text-white">
                             <i class="bi bi-receipt me-2"></i>Detail Transaksi
                         </h5>
@@ -228,11 +228,11 @@
                         <div class="total-section">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
-                                    <i class="bi bi-cash-coin me-2" style="font-size: 1.5rem; color: #03AC0E;"></i>
+                                    <i class="bi bi-cash-coin me-2" style="font-size: 1.5rem; color: #550000;"></i>
                                     <strong style="font-size: 1.2rem; color: #1f2937;">Total Pembayaran</strong>
                                 </div>
                                 <div>
-                                    <h3 class="mb-0 fw-bold" style="color: #03AC0E;">Rp {{ number_format($item->total_harga, 0, ',', '.') }}</h3>
+                                    <h3 class="mb-0 fw-bold" style="color: #550000;">Rp {{ number_format($item->total_harga, 0, ',', '.') }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                 <div class="modal-content border-0" style="border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);">
                     <div class="modal-header border-0" style="background: white; padding: 1.5rem 2rem;">
                         <h5 class="modal-title fw-bold mb-0" style="color: #1f2937;">
-                            <i class="bi bi-pencil-square me-2" style="color: #03AC0E;"></i>Update Status Transaksi
+                            <i class="bi bi-pencil-square me-2" style="color: #550000;"></i>Update Status Transaksi
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
@@ -282,7 +282,7 @@
                                         <div class="status-radio-indicator"></div>
                                         <div class="status-radio-content">
                                             <div class="status-radio-info">
-                                                <div class="status-dot" style="background: #10b981;"></div>
+                                                <div class="status-dot" style="background: #3d0000;"></div>
                                                 <strong style="color: #1f2937; font-size: 0.95rem;">Selesai</strong>
                                             </div>
                                             <small style="color: #6b7280;">Pembayaran telah diterima</small>
@@ -309,7 +309,7 @@
                             <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal" style="border: 1px solid #e5e7eb; font-weight: 500;">
                                 Batal
                             </button>
-                            <button type="submit" class="btn px-4" style="background: #03AC0E; color: white; border: none; font-weight: 500;">
+                            <button type="submit" class="btn px-4" style="background: #550000; color: white; border: none; font-weight: 500;">
                                 <i class="bi bi-check-lg me-1"></i>Simpan
                             </button>
                         </div>
@@ -409,7 +409,7 @@
     body.dark-mode .form-select {
         background: #1a1a2e;
         color: #e5e7eb;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
     }
 
     .detail-card {
@@ -462,13 +462,13 @@
     body.dark-mode .form-select {
         background: #1a1a2e;
         color: #e5e7eb;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
     }
 
     body.dark-mode .form-control:focus,
     body.dark-mode .form-select:focus {
         background: #1a1a2e;
-        border-color: #03AC0E;
+        border-color: #550000;
         color: #e5e7eb;
     }
 
@@ -545,13 +545,13 @@
 
     /* Active/Checked State */
     .status-radio-option input[type="radio"]:checked + .status-radio-card {
-        border-color: #03AC0E;
-        background: #f0fdf4;
+        border-color: #550000;
+        background: #f7e3e3;
     }
 
     .status-radio-option input[type="radio"]:checked + .status-radio-card .status-radio-indicator {
-        background: #03AC0E;
-        border-color: #03AC0E;
+        background: #550000;
+        border-color: #550000;
     }
 
     /* Dark Mode untuk Modal Baru */
@@ -573,8 +573,8 @@
     }
 
     body.dark-mode .status-radio-option input[type="radio"]:checked + .status-radio-card {
-        background: rgba(3, 172, 14, 0.1);
-        border-color: #03AC0E;
+        background: rgba(85, 0, 0, 0.1);
+        border-color: #550000;
     }
 
     /* Responsive untuk Modal Baru */
@@ -829,3 +829,4 @@
 </style>
 
 @endsection
+

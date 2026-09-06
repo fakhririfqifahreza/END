@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <div class="container my-5">
@@ -21,10 +21,10 @@
                         <div class="col-md-5">
                             <div class="p-3 p-md-4 rounded-4 bg-success bg-opacity-10 h-100">
                                 <h5 class="fw-semibold text-success mb-3">
-                                    🏪 Warung Sembako CPM
+                                    ðŸª Warung Sembako CPM
                                 </h5>
                                 <p class="text-secondary mb-2">
-                                    📍 Alamat:
+                                    ðŸ“ Alamat:
                                 </p>
                                 <p class="text-secondary">
                                     Sukadarma<br>
@@ -152,7 +152,8 @@
     }
 
     body.dark-mode .bg-success.bg-opacity-10 {
-        background: rgba(3, 172, 14, 0.15) !important;
+        background: rgba(85, 0, 0, 0.15) !important;
     }
 </style>
 @endsection
+

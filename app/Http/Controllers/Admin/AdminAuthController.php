@@ -11,18 +11,17 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminAuthController extends Controller
 {
-    // Tampilkan halaman login admin
+    // Tampilkan halaman login
     public function showLogin()
     {
-        // Jika sudah login sebagai admin/pemilik warung, redirect ke dashboard
         if (Auth::check() && Auth::user()->isAdminOrOwner()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.kasir');
         }
-        
+
         return view('admin.auth.login');
     }
 
-    // Proses login admin
+    // Proses login
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -41,22 +40,27 @@ class AdminAuthController extends Controller
                 ->withInput();
         }
 
+        // Kredensial login
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->remember)) {
-            // Pastikan user adalah admin/pemilik warung
+            // 1. Cek apakah status akun sedang dinonaktifkan oleh Owner
+            if (isset(Auth::user()->is_active) && !Auth::user()->is_active) {
+                Auth::logout();
+                return redirect()->back()
+                    ->withErrors(['email' => 'Akun Anda sedang dinonaktifkan oleh Owner. Silakan hubungi pemilik warung.'])
+                    ->withInput();
+            }
+
+            // 2. Cek apakah role akun memiliki hak akses kasir / admin / owner
             if (Auth::user()->isAdminOrOwner()) {
                 $request->session()->regenerate();
-                if (Auth::user()->isOwner()) {
-                    return redirect()->route('admin.dashboard')->with('success', 'Selamat datang, Pemilik Warung!');
-                }
-                return redirect()->route('admin.dashboard')->with('success', 'Selamat datang, Admin!');
+                return redirect()->route('admin.kasir')->with('success', 'Selamat datang!');
             }
- 
-            // Jika bukan admin/pemilik warung, logout dan redirect
+
             Auth::logout();
             return redirect()->back()
-                ->withErrors(['email' => 'Akun Anda bukan akun admin atau pemilik warung'])
+                ->withErrors(['email' => 'Akun Anda bukan akun admin, kasir, atau pemilik warung'])
                 ->withInput();
         }
 
@@ -65,29 +69,31 @@ class AdminAuthController extends Controller
             ->withInput();
     }
 
-    // Tampilkan halaman register admin
+    // Tampilkan halaman register
     public function showRegister()
     {
-        // Jika sudah login sebagai admin/pemilik warung, redirect ke dashboard
         if (Auth::check() && Auth::user()->isAdminOrOwner()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.kasir');
         }
-        
+
         return view('admin.auth.register');
     }
 
-    // Proses register admin
+    // Proses register
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'role' => 'required|in:admin,pemilik_warung,kasir,owner',
             'password' => 'required|min:6|confirmed',
         ], [
             'name.required' => 'Nama wajib diisi',
             'email.required' => 'Email wajib diisi',
             'email.email' => 'Format email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
+            'role.required' => 'Role wajib dipilih',
+            'role.in' => 'Role yang dipilih tidak valid',
             'password.required' => 'Password wajib diisi',
             'password.min' => 'Password minimal 6 karakter',
             'password.confirmed' => 'Konfirmasi password tidak cocok',
@@ -103,21 +109,22 @@ class AdminAuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'admin', // Set role sebagai admin
+            'role' => $request->role,
+            'is_active' => true,
         ]);
 
         Auth::login($user);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Registrasi admin berhasil! Selamat datang!');
+        return redirect()->route('admin.kasir')->with('success', 'Selamat datang!');
     }
 
-    // Proses logout admin
+    // Proses logout
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('admin.login')->with('success', 'Berhasil logout');
+        return redirect()->route('login')->with('success', 'Berhasil logout');
     }
 }

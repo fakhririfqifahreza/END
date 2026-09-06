@@ -1,140 +1,131 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-
-use App\Models\Barang;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Barang;
+use Illuminate\Support\Facades\Storage;
 
-class BarangController extends Controller
+class ProdukController extends Controller
 {
-    // Tampilkan semua data barang
-    public function index()
+    public function index(Request $request)
     {
-        $barang = Barang::all();
-        return view('barang.index', compact('barang'));
+        $query = Barang::query();
+
+        if ($request->filled('search')) {
+            $query->where('nama_barang', 'like', '%' . $request->search . '%');
+        }
+
+        $produks = $query->orderBy('nama_barang', 'asc')->paginate(10);
+
+        return view('admin.produk.index', compact('produks'));
     }
 
-    // Simpan barang baru
+    public function create()
+    {
+        return view('admin.produk.create');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'nama_barang' => 'required',
-            'stok_barang' => 'required|string',
-            'harga_barang' => 'required|numeric',
-            'gambar_barang' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'nama_barang'    => 'required|string|max:255',
+            'harga_barang'   => 'required|numeric|min:0',
+            'jumlah_stok'    => 'required|numeric|min:0',
+            'satuan'         => 'required|string|max:50',
+            'gambar_barang'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'is_tukar_wadah' => 'nullable|boolean',
+            'harga_wadah'    => 'nullable|numeric|min:0',
+            'stok_kosong'    => 'nullable|integer|min:0',
         ]);
 
-        // Upload gambar kalau ada
-        $namaFile = null;
+        $data = $request->only(['nama_barang', 'harga_barang']);
+
+        // Gabungkan angka stok dan satuan (misal: "15 tabung (3kg)")
+        $stokLengkap = $request->jumlah_stok . ' ' . $request->satuan;
+        $data['stok_barang'] = $stokLengkap;
+        $data['stok_awal']   = $stokLengkap;
+
+        // Logika produk tukar wadah (gas / galon)
+        $isWadah = $request->has('is_tukar_wadah') ? 1 : 0;
+        $data['is_tukar_wadah'] = $isWadah;
+        $data['harga_wadah']    = $isWadah ? ($request->harga_wadah ?? 0) : 0;
+        $data['stok_kosong']    = $isWadah ? ($request->stok_kosong ?? 0) : 0;
+
         if ($request->hasFile('gambar_barang')) {
-            $file = $request->file('gambar_barang');
-            $namaFile = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/gambar', $namaFile);
+            $data['gambar_barang'] = $request->file('gambar_barang')->store('produk', 'public');
         }
 
-        \App\Models\Barang::create([
-            'nama_barang' => $request->nama_barang,
-            'stok_barang' => $request->stok_barang,
-            'harga_barang' => $request->harga_barang,
-            'gambar_barang' => $namaFile,
-        ]);
+        Barang::create($data);
 
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('admin.produk')->with('success', 'Produk berhasil ditambahkan.');
     }
 
-
-
-    public function search(Request $request)
+    public function edit($id)
     {
-        $query = $request->input('query');
-
-        // Jika ada kata yang diketik
-        if (!empty($query)) {
-            $barang = \App\Models\Barang::where('nama_barang', 'LIKE', "%{$query}%")
-                ->orderBy('id_barang', 'desc')
-                ->get();
-        } else {
-            // Kalau input kosong, tampilkan semua
-            $barang = \App\Models\Barang::orderBy('id_barang', 'desc')->get();
-        }
-
-        return response()->json($barang);
-    }
-
-    // Update stok barang
-    public function updateStok(Request $request, $id)
-    {
-        $request->validate([
-            'nama_barang' => 'required',
-            'stok_barang' => 'required',
-            'harga_barang' => 'required|numeric',
-            'gambar_barang' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
         $barang = Barang::findOrFail($id);
-        
-        // Cek apa yang berubah
-        $namaBerubah = $barang->nama_barang != $request->nama_barang;
-        $stokBerubah = $barang->stok_barang != $request->stok_barang;
-        $hargaBerubah = $barang->harga_barang != $request->harga_barang;
-        $gambarBerubah = false;
-        
-        // Handle upload gambar baru
-        if ($request->hasFile('gambar_barang')) {
-            // Hapus gambar lama jika ada
-            if ($barang->gambar_barang) {
-                $filePathLama = storage_path('app/public/gambar/' . $barang->gambar_barang);
-                if (file_exists($filePathLama)) {
-                    unlink($filePathLama);
-                }
-            }
-            
-            // Upload gambar baru
-            $file = $request->file('gambar_barang');
-            $namaFile = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/gambar', $namaFile);
-            $barang->gambar_barang = $namaFile;
-            $gambarBerubah = true;
-        }
-        
-        // Update data
-        $barang->nama_barang = $request->nama_barang;
-        $barang->stok_barang = $request->stok_barang;
-        $barang->harga_barang = $request->harga_barang;
-        $barang->save();
-        
-        // Tentukan pesan notifikasi berdasarkan perubahan
-        $perubahanArr = [];
-        if ($namaBerubah) $perubahanArr[] = 'nama';
-        if ($stokBerubah) $perubahanArr[] = 'stok';
-        if ($hargaBerubah) $perubahanArr[] = 'harga';
-        if ($gambarBerubah) $perubahanArr[] = 'gambar';
-        
-        if (count($perubahanArr) > 0) {
-            $message = ucfirst(implode(', ', $perubahanArr)) . ' produk berhasil disimpan!';
-        } else {
-            $message = 'Data produk berhasil disimpan!';
-        }
 
-        return redirect()->back()->with('success', $message);
+        // Ekstrak angka stok dan satuannya agar terisi otomatis di form edit
+        preg_match('/^(\d+(?:\.\d+)?)\s*(.*)$/', trim($barang->stok_barang), $matches);
+        $jumlahStok = isset($matches[1]) ? $matches[1] : $barang->stok_barang;
+        $satuan = isset($matches[2]) ? trim($matches[2]) : '';
+
+        return view('admin.produk.edit', compact('barang', 'jumlahStok', 'satuan'));
     }
 
-    // Hapus barang
+    public function update(Request $request, $id)
+    {
+        $barang = Barang::findOrFail($id);
+
+        $request->validate([
+            'nama_barang'    => 'required|string|max:255',
+            'harga_barang'   => 'required|numeric|min:0',
+            'jumlah_stok'    => 'required|numeric|min:0',
+            'satuan'         => 'required|string|max:50',
+            'gambar_barang'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'is_tukar_wadah' => 'nullable|boolean',
+            'harga_wadah'    => 'nullable|numeric|min:0',
+            'stok_kosong'    => 'nullable|integer|min:0',
+        ]);
+
+        $data = $request->only(['nama_barang', 'harga_barang']);
+
+        $stokLengkap = $request->jumlah_stok . ' ' . $request->satuan;
+        $data['stok_barang'] = $stokLengkap;
+
+        // Update stok_awal jika stok bertambah saat restock
+        if ($stokLengkap !== $barang->stok_barang) {
+            $data['stok_awal'] = $stokLengkap;
+        }
+
+        $isWadah = $request->has('is_tukar_wadah') ? 1 : 0;
+        $data['is_tukar_wadah'] = $isWadah;
+        $data['harga_wadah']    = $isWadah ? ($request->harga_wadah ?? 0) : 0;
+        $data['stok_kosong']    = $isWadah ? ($request->stok_kosong ?? 0) : 0;
+
+        if ($request->hasFile('gambar_barang')) {
+            if ($barang->gambar_barang && Storage::disk('public')->exists($barang->gambar_barang)) {
+                Storage::disk('public')->delete($barang->gambar_barang);
+            }
+            $data['gambar_barang'] = $request->file('gambar_barang')->store('produk', 'public');
+        }
+
+        $barang->update($data);
+
+        return redirect()->route('admin.produk')->with('success', 'Data produk berhasil diperbarui.');
+    }
+
     public function destroy($id)
     {
         $barang = Barang::findOrFail($id);
-        
-        // Hapus gambar jika ada
-        if ($barang->gambar_barang) {
-            $filePath = storage_path('app/public/gambar/' . $barang->gambar_barang);
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            }
+
+        if ($barang->gambar_barang && Storage::disk('public')->exists($barang->gambar_barang)) {
+            Storage::disk('public')->delete($barang->gambar_barang);
         }
-        
+
         $barang->delete();
 
-        return redirect()->back()->with('success', 'Produk berhasil dihapus!');
+        return redirect()->route('admin.produk')->with('success', 'Produk berhasil dihapus.');
     }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,57 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <style>
+        :root {
+            --brand-success: #550000;
+            --brand-success-dark: #3d0000;
+            --brand-success-rgb: 85, 0, 0;
+            --bs-success: #550000;
+            --bs-success-rgb: 85, 0, 0;
+            --bs-success-text-emphasis: #550000;
+            --bs-success-bg-subtle: #f7e3e3;
+            --bs-success-border-subtle: #d9a3a3;
+        }
+
+        .text-success {
+            color: var(--brand-success) !important;
+        }
+
+        .bg-success {
+            background-color: var(--brand-success) !important;
+        }
+
+        .btn-success {
+            --bs-btn-bg: var(--brand-success);
+            --bs-btn-border-color: var(--brand-success);
+            --bs-btn-hover-bg: var(--brand-success-dark);
+            --bs-btn-hover-border-color: var(--brand-success-dark);
+            --bs-btn-active-bg: var(--brand-success-dark);
+            --bs-btn-active-border-color: var(--brand-success-dark);
+            --bs-btn-disabled-bg: var(--brand-success);
+            --bs-btn-disabled-border-color: var(--brand-success);
+        }
+
+        .btn-outline-success {
+            --bs-btn-color: var(--brand-success);
+            --bs-btn-border-color: var(--brand-success);
+            --bs-btn-hover-bg: var(--brand-success);
+            --bs-btn-hover-border-color: var(--brand-success);
+            --bs-btn-active-bg: var(--brand-success-dark);
+            --bs-btn-active-border-color: var(--brand-success-dark);
+        }
+
+        .alert-success {
+            --bs-alert-color: #5a1a1a;
+            --bs-alert-bg: #f7e3e3;
+            --bs-alert-border-color: #d9a3a3;
+            --bs-alert-link-color: #3d0000;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--brand-success);
+            border-color: var(--brand-success);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -62,8 +113,8 @@
         }
 
         .form-control:focus {
-            border-color: #03AC0E;
-            box-shadow: 0 0 0 4px rgba(3, 172, 14, 0.1);
+            border-color: var(--brand-success);
+            box-shadow: 0 0 0 4px rgba(var(--brand-success-rgb), 0.1);
             outline: none;
         }
 
@@ -74,43 +125,43 @@
         .btn-login, .btn-register {
             width: 100%;
             padding: 0.85rem;
-            background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%);
+            background: linear-gradient(135deg, var(--brand-success) 0%, var(--brand-success-dark) 100%);
             color: white;
             border: none;
             border-radius: 10px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(3, 172, 14, 0.3);
+            box-shadow: 0 4px 12px rgba(var(--brand-success-rgb), 0.3);
             font-family: 'Poppins', sans-serif;
         }
 
         .btn-login:hover, .btn-register:hover {
-            background: linear-gradient(135deg, #028A0F 0%, #026D0B 100%);
+            background: linear-gradient(135deg, var(--brand-success-dark) 0%, #280000 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(3, 172, 14, 0.4);
+            box-shadow: 0 6px 20px rgba(var(--brand-success-rgb), 0.4);
         }
 
         .link-register, .link-login {
-            color: #03AC0E;
+            color: var(--brand-success);
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .link-register:hover, .link-login:hover {
-            color: #028A0F;
+            color: var(--brand-success-dark);
             text-decoration: underline;
         }
 
         .form-check-input:checked {
-            background-color: #03AC0E;
-            border-color: #03AC0E;
+            background-color: var(--brand-success);
+            border-color: var(--brand-success);
         }
 
         .form-check-input:focus {
-            border-color: #03AC0E;
-            box-shadow: 0 0 0 0.25rem rgba(3, 172, 14, 0.25);
+            border-color: var(--brand-success);
+            box-shadow: 0 0 0 0.25rem rgba(var(--brand-success-rgb), 0.25);
         }
 
         .alert {
@@ -120,8 +171,8 @@
         }
 
         .alert-success {
-            background: #d1fae5;
-            color: #065f46;
+            background: #f7e3e3;
+            color: #5a1a1a;
         }
 
         .alert-danger {
@@ -131,7 +182,7 @@
 
         .admin-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%);
+            background: linear-gradient(135deg, var(--brand-success) 0%, var(--brand-success-dark) 100%);
             color: white;
             padding: 0.4rem 1rem;
             border-radius: 20px;
@@ -139,7 +190,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 2px 6px rgba(3, 172, 14, 0.3);
+            box-shadow: 0 2px 6px rgba(var(--brand-success-rgb), 0.3);
             margin-top: 0.5rem;
         }
 
@@ -182,3 +233,4 @@
     @stack('scripts')
 </body>
 </html>
+

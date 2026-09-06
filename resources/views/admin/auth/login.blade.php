@@ -1,4 +1,4 @@
-@extends('layouts.auth-admin')
+﻿@extends('layouts.auth-admin')
 
 @section('title', 'Login Admin - Warung Sembako CPM')
 
@@ -8,7 +8,7 @@
         <div class="auth-card">
             {{-- LOGO --}}
             <div class="text-center mb-4">
-                <img src="{{ asset('logo/logo 2.png') }}" alt="Logo CPM" class="logo-img">
+                <img src="{{ asset('logo/logo baru.jpeg') }}" alt="Logo CPM" class="logo-img">
                 <h2 class="fw-bold auth-title">Login Admin</h2>
                 <span class="admin-badge">Warung Sembako Cahaya Putri Maulana (CPM)</span>
             </div>
@@ -29,7 +29,7 @@
             {{-- FORM LOGIN --}}
             <form action="{{ route('admin.login.submit') }}" method="POST">
                 @csrf
-                
+
                 {{-- EMAIL --}}
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Email Admin</label>
@@ -37,7 +37,7 @@
                         <span class="input-icon">
                             <i class="bi bi-envelope"></i>
                         </span>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                placeholder="Masukkan email admin" value="{{ old('email') }}" required autofocus>
                     </div>
                     @error('email')
@@ -52,7 +52,7 @@
                         <span class="input-icon">
                             <i class="bi bi-lock"></i>
                         </span>
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" 
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                                placeholder="Masukkan password" required>
                     </div>
                     @error('password')
@@ -90,7 +90,7 @@
     }
 
     .auth-title {
-        color: #03AC0E;
+        color: #550000;
         font-size: 1.75rem;
     }
 
@@ -158,3 +158,4 @@
 </style>
 @endpush
 @endsection
+

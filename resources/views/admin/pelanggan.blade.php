@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="page-header mb-4">
-        <h2 class="fw-bold" style="color: #03AC0E;">Mengelola Pelanggan</h2>
+        <h2 class="fw-bold" style="color: #550000;">Mengelola Pelanggan</h2>
     </div>
 
     {{-- TABLE PELANGGAN --}}
@@ -58,7 +58,7 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%);
+        background: linear-gradient(135deg, #550000 0%, #3d0000 100%);
         color: white;
         display: flex;
         align-items: center;
@@ -188,29 +188,29 @@
 
         /* Badge status */
         .table .badge {
-            font-size: 0.65rem !重要;
-            padding: 0.2rem 0.35rem !重要;
+            font-size: 0.65rem !é‡è¦;
+            padding: 0.2rem 0.35rem !é‡è¦;
         }
 
         .table .badge i {
             font-size: 0.6rem;
-            margin-right: 2px !重要;
+            margin-right: 2px !é‡è¦;
         }
 
         /* Header tabel */
         .table thead th {
-            font-size: 0.7rem !重要;
-            padding: 0.6rem 0.4rem !重要;
+            font-size: 0.7rem !é‡è¦;
+            padding: 0.6rem 0.4rem !é‡è¦;
         }
 
         .table th,
         .table td {
-            padding: 0.6rem 0.4rem !重要;
+            padding: 0.6rem 0.4rem !é‡è¦;
         }
 
         /* Gap antara avatar dan nama lebih kecil */
         .table td .d-flex.gap-2 {
-            gap: 0.5rem !重要;
+            gap: 0.5rem !é‡è¦;
         }
     }
 
@@ -228,19 +228,19 @@
 
         /* Nama pelanggan */
         .table td .fw-semibold {
-            font-size: 0.7rem !重要;
+            font-size: 0.7rem !é‡è¦;
         }
 
         /* Email sangat compact */
         .table td:nth-child(3) {
-            font-size: 0.65rem !重要;
+            font-size: 0.65rem !é‡è¦;
             max-width: 120px;
         }
 
         /* Badge status sangat kecil */
         .table .badge {
-            font-size: 0.6rem !重要;
-            padding: 0.15rem 0.3rem !重要;
+            font-size: 0.6rem !é‡è¦;
+            padding: 0.15rem 0.3rem !é‡è¦;
         }
 
         .table .badge i {
@@ -250,3 +250,4 @@
 </style>
 
 @endsection
+

@@ -1,15 +1,15 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="page-header mb-4">
-        <h2 class="fw-bold" style="color: #03AC0E;">Dashboard</h2>
+        <h2 class="fw-bold" style="color: #550000;">Dashboard</h2>
     </div>
 
     {{-- STATISTIK CARDS --}}
     <div class="row g-3">
         <div class="col-xl-3 col-md-6">
-            <div class="stat-card" style="background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%);">
+            <div class="stat-card" style="background: linear-gradient(135deg, #550000 0%, #3d0000 100%);">
                 <div class="stat-icon">
                     <i class="bi bi-box-seam"></i>
                 </div>
@@ -237,7 +237,7 @@
         }
     }
 
-    /* Extra small devices (≤400px) */
+    /* Extra small devices (â‰¤400px) */
     @media (max-width: 400px) {
         .page-header h2 {
             font-size: 1.15rem;
@@ -266,3 +266,4 @@
 </style>
 
 @endsection
+

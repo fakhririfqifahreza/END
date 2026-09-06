@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <style>
@@ -77,7 +77,7 @@
         border: 1px solid #e5e7eb;
         border-radius: 6px;
         background: #ffffff;
-        color: #03AC0E;
+        color: #550000;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -88,9 +88,9 @@
     }
 
     .qty-btn:hover {
-        background: #03AC0E;
+        background: #550000;
         color: #ffffff;
-        border-color: #03AC0E;
+        border-color: #550000;
     }
 
     .qty-btn:disabled {
@@ -111,7 +111,7 @@
         text-align: right;
         font-size: 1.1rem;
         font-weight: 700;
-        color: #03AC0E;
+        color: #550000;
     }
 
     .item-delete {
@@ -177,12 +177,12 @@
     .summary-total-value {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #03AC0E;
+        color: #550000;
     }
 
     .btn-checkout {
         width: 100%;
-        background: #03AC0E;
+        background: #550000;
         color: #ffffff;
         border: none;
         border-radius: 8px;
@@ -195,9 +195,9 @@
     }
 
     .btn-checkout:hover {
-        background: #028A0F;
+        background: #3d0000;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(3, 172, 14, 0.3);
+        box-shadow: 0 4px 12px rgba(85, 0, 0, 0.3);
     }
 
     .btn-delete-all {
@@ -245,7 +245,7 @@
     }
 
     .btn-shop {
-        background: #03AC0E;
+        background: #550000;
         color: #ffffff;
         border: none;
         border-radius: 8px;
@@ -258,7 +258,7 @@
     }
 
     .btn-shop:hover {
-        background: #028A0F;
+        background: #3d0000;
         color: #ffffff;
         transform: translateY(-2px);
     }
@@ -448,14 +448,14 @@
 
     body.dark-mode .qty-btn {
         background: #1a1a2e;
-        border-color: rgba(3, 172, 14, 0.3);
-        color: #03AC0E;
+        border-color: rgba(85, 0, 0, 0.3);
+        color: #550000;
     }
 
     body.dark-mode .qty-btn:hover {
-        background: #03AC0E;
+        background: #550000;
         color: #ffffff;
-        border-color: #03AC0E;
+        border-color: #550000;
     }
 
     body.dark-mode .qty-display {
@@ -463,7 +463,7 @@
     }
 
     body.dark-mode .item-subtotal {
-        color: #03AC0E;
+        color: #550000;
     }
 
     body.dark-mode .btn-delete-item {
@@ -510,7 +510,7 @@
     }
 
     body.dark-mode .summary-total-value {
-        color: #03AC0E;
+        color: #550000;
     }
 
     body.dark-mode .summary-total {
@@ -550,7 +550,7 @@
 
     body.dark-mode .card {
         background: #16213e;
-        border-color: rgba(3, 172, 14, 0.2);
+        border-color: rgba(85, 0, 0, 0.2);
     }
 
     body.dark-mode .card-body span {
@@ -559,12 +559,12 @@
 
     body.dark-mode .payment-section-compact {
         background: #16213e;
-        border-color: rgba(3, 172, 14, 0.2);
+        border-color: rgba(85, 0, 0, 0.2);
     }
 
     body.dark-mode .payment-details-compact {
         background: #16213e;
-        border-color: rgba(3, 172, 14, 0.2);
+        border-color: rgba(85, 0, 0, 0.2);
     }
 
     body.dark-mode .form-label {
@@ -573,13 +573,13 @@
 
     body.dark-mode .form-control {
         background: #1a1a2e;
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
         color: #e5e7eb;
     }
 
     body.dark-mode .form-control:focus {
         background: #1a1a2e;
-        border-color: #03AC0E;
+        border-color: #550000;
         color: #e5e7eb;
     }
 
@@ -592,21 +592,21 @@
     }
 
     body.dark-mode .payment-method-compact {
-        border-color: rgba(3, 172, 14, 0.3);
+        border-color: rgba(85, 0, 0, 0.3);
     }
 
     body.dark-mode .payment-method-compact:hover {
-        border-color: #03AC0E;
+        border-color: #550000;
     }
 
     body.dark-mode .btn-check:checked + .payment-method-compact {
-        background: #03AC0E;
+        background: #550000;
     }
 
     body.dark-mode .alert-success {
-        background: rgba(3, 172, 14, 0.1);
-        border: 1px solid rgba(3, 172, 14, 0.3);
-        color: #03AC0E;
+        background: rgba(85, 0, 0, 0.1);
+        border: 1px solid rgba(85, 0, 0, 0.3);
+        color: #550000;
     }
 
     .payment-input-section {
@@ -614,13 +614,13 @@
     }
 
     .payment-input-section:focus-within {
-        border-color: #03AC0E !important;
-        box-shadow: 0 0 0 0.2rem rgba(3, 172, 14, 0.15);
+        border-color: #550000 !important;
+        box-shadow: 0 0 0 0.2rem rgba(85, 0, 0, 0.15);
     }
 
     #bayar:focus {
-        border-color: #03AC0E !important;
-        box-shadow: 0 0 0 0.2rem rgba(3, 172, 14, 0.15);
+        border-color: #550000 !important;
+        box-shadow: 0 0 0 0.2rem rgba(85, 0, 0, 0.15);
     }
 
     .modal-checkout .modal-dialog {
@@ -636,7 +636,7 @@
     /* Dark Mode untuk modal baru */
     body.dark-mode .payment-input-section {
         background: #1a1a2e !important;
-        border-color: rgba(3, 172, 14, 0.3) !important;
+        border-color: rgba(85, 0, 0, 0.3) !important;
     }
 
     body.dark-mode .payment-input-section label {
@@ -645,13 +645,13 @@
 
     body.dark-mode #bayar {
         background: #16213e !important;
-        border-color: rgba(3, 172, 14, 0.3) !important;
+        border-color: rgba(85, 0, 0, 0.3) !important;
         color: #e5e7eb !important;
     }
 
     body.dark-mode #kembalian {
-        background: rgba(3, 172, 14, 0.15) !important;
-        border-color: #03AC0E !important;
+        background: rgba(85, 0, 0, 0.15) !important;
+        border-color: #550000 !important;
     }
 
     body.dark-mode #kembalian strong {
@@ -661,7 +661,7 @@
     /* Dark Mode untuk QRIS Section */
     body.dark-mode .payment-qris-section {
         background: #1a1a2e !important;
-        border-color: rgba(3, 172, 14, 0.3) !important;
+        border-color: rgba(85, 0, 0, 0.3) !important;
     }
 
     body.dark-mode .payment-qris-section h6 {
@@ -686,23 +686,23 @@
     }
 
     body.dark-mode .btn-outline-success {
-        color: #03AC0E;
-        border-color: #03AC0E;
+        color: #550000;
+        border-color: #550000;
     }
 
     body.dark-mode .btn-check:checked + .btn-outline-success {
-        background: #03AC0E;
+        background: #550000;
         color: white;
     }
 
     /* Dark Mode untuk DANA Section */
     body.dark-mode .dana-number-box {
         background: #16213e !important;
-        border-color: rgba(3, 172, 14, 0.5) !important;
+        border-color: rgba(85, 0, 0, 0.5) !important;
     }
 
     body.dark-mode .dana-number-box h3 {
-        color: #03AC0E !important;
+        color: #550000 !important;
     }
 
     body.dark-mode .dana-number-box small {
@@ -710,8 +710,8 @@
     }
 
     body.dark-mode .dana-amount {
-        background: rgba(3, 172, 14, 0.15) !important;
-        border-color: #03AC0E !important;
+        background: rgba(85, 0, 0, 0.15) !important;
+        border-color: #550000 !important;
     }
 
     body.dark-mode .dana-amount strong {
@@ -719,7 +719,7 @@
     }
 
     body.dark-mode .dana-amount span {
-        color: #03AC0E !important;
+        color: #550000 !important;
     }
 
     body.dark-mode .alert-info {
@@ -823,7 +823,7 @@
 <div class="modal fade modal-checkout" id="modalBayar" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header" style="background: #03AC0E; color: white; padding: 1.5rem;">
+            <div class="modal-header" style="background: #550000; color: white; padding: 1.5rem;">
                 <h5 class="modal-title fw-bold mb-0">
                     <i class="bi bi-cash-coin me-2"></i>Pembayaran
                 </h5>
@@ -847,7 +847,7 @@
                                 <span style="font-size: 1.2rem; font-weight: 700; color: #212529;">
                                     <i class="bi bi-cash-coin me-2"></i>Total Harga:
                                 </span>
-                                <span class="fw-bold" style="font-size: 1.6rem; color: #03AC0E;" id="modal-total-belanja">Rp {{ number_format($total, 0, ',', '.') }}</span>
+                                <span class="fw-bold" style="font-size: 1.6rem; color: #550000;" id="modal-total-belanja">Rp {{ number_format($total, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>
@@ -888,17 +888,17 @@
                     {{-- INPUT PEMBAYARAN DANA --}}
                     <div class="payment-input-section" id="danaSection" style="background: white; padding: 1.25rem; border-radius: 12px; border: 2px solid #e9ecef; display: none;">
                         <div class="text-center mb-3">
-                            <div style="background: linear-gradient(135deg, #03AC0E 0%, #028A0F 100%); color: white; padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <div style="background: linear-gradient(135deg, #550000 0%, #3d0000 100%); color: white; padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
                                 <i class="bi bi-wallet2" style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;"></i>
                                 <h6 class="fw-bold mb-2">Transfer ke DANA</h6>
                                 <p class="mb-0" style="font-size: 0.9rem; opacity: 0.9;">Kirim pembayaran ke nomor DANA berikut:</p>
                             </div>
                             
-                            <div class="dana-number-box" style="background: #f8f9fa; border: 2px dashed #03AC0E; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+                            <div class="dana-number-box" style="background: #f8f9fa; border: 2px dashed #550000; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
                                 <label class="form-label fw-bold text-muted mb-2" style="font-size: 0.85rem;">NOMOR DANA</label>
                                 <div class="d-flex align-items-center justify-content-center gap-2">
-                                    <h3 class="fw-bold mb-0" style="color: #03AC0E; font-size: 1.8rem; letter-spacing: 2px;" id="danaNomor">085893265952</h3>
-                                    <button type="button" class="btn btn-sm btn-outline-success" onclick="copyDanaNumber()" style="border-radius: 8px; border-color: #03AC0E; color: #03AC0E;">
+                                    <h3 class="fw-bold mb-0" style="color: #550000; font-size: 1.8rem; letter-spacing: 2px;" id="danaNomor">085893265952</h3>
+                                    <button type="button" class="btn btn-sm btn-outline-success" onclick="copyDanaNumber()" style="border-radius: 8px; border-color: #550000; color: #550000;">
                                         <i class="bi bi-clipboard"></i> Salin
                                     </button>
                                 </div>
@@ -907,9 +907,9 @@
                                 </small>
                             </div>
 
-                            <div class="alert alert-info" style="background: #d1f4e0; border: 1px solid #03AC0E; border-radius: 8px; text-align: left;">
-                                <strong style="color: #028A0F;"><i class="bi bi-info-circle me-2"></i>Cara Pembayaran:</strong>
-                                <ol class="mb-0 mt-2" style="color: #028A0F; font-size: 0.85rem; padding-left: 1.2rem;">
+                            <div class="alert alert-info" style="background: #f7e3e3; border: 1px solid #550000; border-radius: 8px; text-align: left;">
+                                <strong style="color: #3d0000;"><i class="bi bi-info-circle me-2"></i>Cara Pembayaran:</strong>
+                                <ol class="mb-0 mt-2" style="color: #3d0000; font-size: 0.85rem; padding-left: 1.2rem;">
                                     <li>Buka aplikasi DANA</li>
                                     <li>Pilih menu "Kirim"</li>
                                     <li>Masukkan nomor DANA: <strong>085893265952</strong></li>
@@ -927,7 +927,7 @@
                                 <i class="bi bi-qr-code-scan me-2 text-success"></i>Scan QR Code untuk Pembayaran
                             </h6>
                             <div class="qr-code-container mb-3" style="background: white; padding: 1rem; border-radius: 12px; display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                                <img src="{{ asset('images/qris-code.jpeg') }}" alt="QRIS Code" style="max-width: 100%; height: auto; max-height: 350px; border: 2px solid #03AC0E; border-radius: 8px; object-fit: contain;">
+                                <img src="{{ asset('images/qris-code.jpeg') }}" alt="QRIS Code" style="max-width: 100%; height: auto; max-height: 350px; border: 2px solid #550000; border-radius: 8px; object-fit: contain;">
                             </div>
                             <div class="alert alert-info mb-3" style="background: #e3f2fd; border: 1px solid #2196F3; border-radius: 8px;">
                                 <i class="bi bi-info-circle me-2"></i>
@@ -999,7 +999,7 @@
                     <button type="button" class="btn btn-secondary px-4 py-2" data-bs-dismiss="modal" style="font-size: 1rem; font-weight: 600;">
                         <i class="bi bi-x-circle me-2"></i>Batal
                     </button>
-                    <button type="submit" class="btn btn-success px-4 py-2" id="btnProsesPembayaran" style="font-size: 1rem; font-weight: 600; background: #03AC0E; border: none;">
+                    <button type="submit" class="btn btn-success px-4 py-2" id="btnProsesPembayaran" style="font-size: 1rem; font-weight: 600; background: #550000; border: none;">
                         <i class="bi bi-check-circle me-2"></i>Proses Pembayaran
                     </button>
                 </div>
@@ -1259,8 +1259,8 @@
         notification.className = 'alert-fixed';
         
         let iconClass = 'bi-check-circle-fill';
-        let borderColor = '#03AC0E';
-        let iconColor = '#03AC0E';
+        let borderColor = '#550000';
+        let iconColor = '#550000';
         
         if (type === 'error') {
             iconClass = 'bi-x-circle-fill';
@@ -1316,3 +1316,4 @@
     }
 </style>
 @endsection
+

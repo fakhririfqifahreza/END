@@ -47,7 +47,6 @@ Route::middleware(['auth'])->group(function () {
 Route::view('/tentang', 'tentang')->name('tentang');
 Route::view('/maps', 'maps')->name('maps');
 Route::view('/kontak', 'kontak')->name('kontak');
-Route::view('/pengaturan', 'settings.index')->name('settings.index');
 
 // AUTH ROUTES
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'showLogin'])->name('login');
@@ -65,31 +64,58 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Admin\AdminAuthController::class, 'logout'])->name('logout');
 });
 
-// ADMIN ROUTES
+// ADMIN & PEMILIK WARUNG ROUTES
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/produk', [App\Http\Controllers\Admin\ProdukController::class, 'index'])->name('produk');
-    Route::get('/pelanggan', [App\Http\Controllers\Admin\PelangganController::class, 'index'])->name('pelanggan');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\KasirController::class, 'index'])->name('dashboard');
+
+    // 1. Kasir (POS)
+    Route::get('/kasir', [App\Http\Controllers\Admin\KasirController::class, 'index'])->name('kasir');
+    Route::post('/kasir/proses', [App\Http\Controllers\Admin\KasirController::class, 'store'])->name('kasir.store');
+
+    // 2. Transaksi (Daftar & Update Status)
     Route::get('/transaksi', [App\Http\Controllers\Admin\TransaksiController::class, 'index'])->name('transaksi');
     Route::post('/transaksi/{id}/update-status', [App\Http\Controllers\Admin\TransaksiController::class, 'updateStatus'])->name('transaksi.updateStatus');
     Route::get('/transaksi/check-new', [App\Http\Controllers\Admin\TransaksiController::class, 'checkNewTransactions'])->name('transaksi.checkNew');
+
+    // 3. Laporan Keuangan
+    Route::get('/laporan', [App\Http\Controllers\Admin\LaporanController::class, 'index'])->name('laporan');
+    Route::get('/laporan/export-excel', [App\Http\Controllers\Admin\LaporanController::class, 'exportExcel'])->name('laporan.export');
+
+    // 4. Kelola Produk (Pemilik Warung)
+    Route::get('/produk', [App\Http\Controllers\Admin\ProdukController::class, 'index'])->name('produk');
+    Route::get('/produk/tambah', [App\Http\Controllers\Admin\ProdukController::class, 'create'])->name('produk.create');
+    Route::post('/produk/simpan', [App\Http\Controllers\Admin\ProdukController::class, 'store'])->name('produk.store');
+    Route::get('/produk/{id}/edit', [App\Http\Controllers\Admin\ProdukController::class, 'edit'])->name('produk.edit');
+    Route::post('/produk/{id}/update', [App\Http\Controllers\Admin\ProdukController::class, 'update'])->name('produk.update');
+    Route::delete('/produk/{id}/hapus', [App\Http\Controllers\Admin\ProdukController::class, 'destroy'])->name('produk.destroy');
+});
+
+// ADMIN & PEMILIK WARUNG ROUTES
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // ... route kasir, transaksi, laporan, produk ...
+
+    // 5. Kelola Akun Admin & Kasir
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+    Route::post('/users', [App\Http\Controllers\Admin\UserController::class, 'store'])->name('users.store');
+    Route::put('/users/{id}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
 });
 
 // Route sementara untuk fix stok (hapus setelah digunakan)
 Route::get('/fix-stok', function() {
     $produks = App\Models\Barang::all();
     $fixed = [];
-    
+
     foreach ($produks as $produk) {
         $stokLama = $produk->stok_barang;
-        
+
         // Ekstrak hanya angka pertama dan satuan (jika ada)
         preg_match('/^(\d+(?:\.\d+)?)\s*(.*)$/', trim($stokLama), $matches);
-        
+
         if (isset($matches[1])) {
             $angka = floatval($matches[1]);
             $satuan = isset($matches[2]) ? trim($matches[2]) : '';
-            
+
             // Format ulang: angka + satuan (jika ada)
             if ($angka <= 0) {
                 $produk->stok_barang = '0';
@@ -97,7 +123,7 @@ Route::get('/fix-stok', function() {
                 $angkaFormatted = (fmod($angka, 1) == 0) ? intval($angka) : $angka;
                 $produk->stok_barang = !empty($satuan) ? $angkaFormatted . ' ' . $satuan : (string)$angkaFormatted;
             }
-            
+
             if ($stokLama !== $produk->stok_barang) {
                 $produk->save();
                 $fixed[] = [
@@ -109,7 +135,7 @@ Route::get('/fix-stok', function() {
             }
         }
     }
-    
+
     return response()->json([
         'message' => 'Stok berhasil dibersihkan',
         'total_fixed' => count($fixed),
