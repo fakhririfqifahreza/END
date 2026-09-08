@@ -243,7 +243,7 @@
                         </button>
 
                         <a href="{{ route('home') }}" class="nav-link-custom {{ Request::routeIs('home') ? 'active-nav' : '' }}">Home</a>
-                        <a href="{{ route('produk.index') }}" class="nav-link-custom {{ Request::routeIs('produk.*') ? 'active-nav' : '' }}">Produk</a>
+                        
 
 
                         {{-- AUTH SECTION --}}
@@ -299,7 +299,7 @@
         <div class="navbar-offcanvas-body">
             <div class="offcanvas-nav-links">
                 <a href="{{ route('home') }}" class="offcanvas-nav-link {{ Request::routeIs('home') ? 'active' : '' }}"><span>Home</span></a>
-                <a href="{{ route('produk.index') }}" class="offcanvas-nav-link {{ Request::routeIs('produk.*') ? 'active' : '' }}"><span>Produk</span></a>
+
             </div>
 
             <div class="offcanvas-divider"></div>

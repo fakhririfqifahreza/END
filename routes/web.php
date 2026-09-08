@@ -1,7 +1,4 @@
 <?php
-
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
