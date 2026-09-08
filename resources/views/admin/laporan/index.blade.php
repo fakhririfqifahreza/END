@@ -95,7 +95,32 @@
             </div>
         </div>
     </div>
-
+{{-- KARTU GRAFIK PENJUALAN --}}
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+    <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
+        <div>
+            <h6 class="fw-bold mb-0 text-dark">
+                <i class="bi bi-graph-up-arrow me-2 text-danger"></i>Grafik Tren Pendapatan
+            </h6>
+            <small class="text-muted">Periode: {{ \Carbon\Carbon::parse($startDate)->translatedFormat('d M Y') }} - {{ \Carbon\Carbon::parse($endDate)->translatedFormat('d M Y') }}</small>
+        </div>
+        <span class="badge bg-danger px-3 py-2">
+            Total: Rp {{ number_format($totalPendapatan, 0, ',', '.') }}
+        </span>
+    </div>
+    <div class="card-body">
+        @if(count($chartValues) > 0)
+            <div style="position: relative; height: 320px; width: 100%;">
+                <canvas id="salesChart"></canvas>
+            </div>
+        @else
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-bar-chart fs-1 d-block mb-2"></i>
+                Tidak ada data penjualan pada rentang tanggal ini.
+            </div>
+        @endif
+    </div>
+</div>
     {{-- TABEL PRATINJAU DATA --}}
     <div class="card shadow-sm border-0 rounded-3">
         <div class="card-body p-0">
@@ -140,4 +165,77 @@
         </div>
     </div>
 </div>
+{{-- PUSTAKA & SKRIP CHART.JS --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    (function() {
+        // 1. Periksa ketersediaan pustaka Chart.js
+        if (typeof Chart === 'undefined') {
+            console.error('Pustaka Chart.js gagal dimuat dari CDN. Pastikan koneksi internet aktif.');
+            return;
+        }
+
+        // 2. Ambil elemen canvas
+        const canvas = document.getElementById('salesChart');
+        if (!canvas) return;
+
+        const labels = @json($chartLabels ?? []);
+        const dataValues = @json($chartValues ?? []);
+
+        // 3. Render Chart secara langsung tanpa menunggu DOMContentLoaded
+        const ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // Tipe batang (bar) agar transaksi 1 hari tetap langsung terlihat jelas
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Omzet Harian (Rp)',
+                    data: dataValues,
+                    backgroundColor: 'rgba(85, 0, 0, 0.75)',
+                    borderColor: '#550000',
+                    borderWidth: 1.5,
+                    borderRadius: 6,
+                    barPercentage: 0.45,
+                    maxBarThickness: 50
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e1e1e',
+                        padding: 10,
+                        callbacks: {
+                            label: function(context) {
+                                return 'Omzet: Rp ' + context.parsed.y.toLocaleString('id-ID');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#6c757d', font: { size: 12 } }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f0f0f0' },
+                        ticks: {
+                            color: '#6c757d',
+                            font: { size: 11 },
+                            callback: function(value) {
+                                if (value >= 1000000) return 'Rp ' + (value / 1000000).toFixed(1) + ' jt';
+                                if (value >= 1000) return 'Rp ' + (value / 1000).toFixed(0) + ' rb';
+                                return 'Rp ' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    })();
+</script>
 @endsection

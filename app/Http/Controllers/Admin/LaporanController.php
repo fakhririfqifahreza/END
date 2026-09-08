@@ -33,7 +33,34 @@ class LaporanController extends Controller
             }
         }
 
-        return view('admin.laporan.index', compact('transaksis', 'startDate', 'endDate', 'totalPendapatan', 'totalBarangTerjual'));
+        // -------------------------------------------------------------
+        // DATA UNTUK DIAGRAM / GRAFIK PENJUALAN HARIAN
+        // -------------------------------------------------------------
+        $chartData = Transaksi::where('status', 'selesai')
+            ->whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->selectRaw('DATE(created_at) as tanggal, SUM(total_harga) as total')
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'asc')
+            ->pluck('total', 'tanggal');
+
+        $chartLabels = [];
+        $chartValues = [];
+
+        foreach ($chartData as $tanggal => $total) {
+            $chartLabels[] = Carbon::parse($tanggal)->translatedFormat('d M');
+            $chartValues[] = (int) $total;
+        }
+
+        return view('admin.laporan.index', compact(
+            'transaksis',
+            'startDate',
+            'endDate',
+            'totalPendapatan',
+            'totalBarangTerjual',
+            'chartLabels',
+            'chartValues'
+        ));
     }
 
     public function exportExcel(Request $request)
@@ -57,8 +84,8 @@ class LaporanController extends Controller
             }
         }
 
-       $fileName = 'Laporan_Keuangan_Waroeng_86_' . date('d_M_Y', strtotime($startDate)) . '_sd_' . date('d_M_Y', strtotime($endDate)) . '.xlsx';
-       
+        $fileName = 'Laporan_Keuangan_Waroeng_86_' . date('d_M_Y', strtotime($startDate)) . '_sd_' . date('d_M_Y', strtotime($endDate)) . '.xlsx';
+
         return Excel::download(new LaporanExport($transaksis, $startDate, $endDate, $totalPendapatan, $totalBarangTerjual), $fileName);
     }
 }

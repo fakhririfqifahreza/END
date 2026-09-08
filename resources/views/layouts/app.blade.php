@@ -300,9 +300,6 @@
             <div class="offcanvas-nav-links">
                 <a href="{{ route('home') }}" class="offcanvas-nav-link {{ Request::routeIs('home') ? 'active' : '' }}"><span>Home</span></a>
                 <a href="{{ route('produk.index') }}" class="offcanvas-nav-link {{ Request::routeIs('produk.*') ? 'active' : '' }}"><span>Produk</span></a>
-                <a href="{{ route('tentang') }}" class="offcanvas-nav-link {{ Request::routeIs('tentang') ? 'active' : '' }}"><span>Tentang Kami</span></a>
-                <a href="{{ route('maps') }}" class="offcanvas-nav-link {{ Request::routeIs('maps') ? 'active' : '' }}"><span>Maps</span></a>
-                <a href="{{ route('kontak') }}" class="offcanvas-nav-link {{ Request::routeIs('kontak') ? 'active' : '' }}"><span>Kontak</span></a>
             </div>
 
             <div class="offcanvas-divider"></div>

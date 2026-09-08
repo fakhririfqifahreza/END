@@ -31,22 +31,6 @@ Route::post('/produk', [BarangController::class, 'store'])->name('produk.store')
 Route::put('/produk/{id}/update-stok', [BarangController::class, 'updateStok'])->name('produk.updateStok');
 Route::delete('/produk/{id}', [BarangController::class, 'destroy'])->name('produk.destroy');
 
-// Keranjang - Bisa diakses tanpa login (menggunakan session)
-Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
-Route::post('/keranjang/hapus-semua', [KeranjangController::class, 'hapusSemua'])->name('keranjang.hapus.semua');
-Route::post('/keranjang/hapus/{id}', [KeranjangController::class, 'hapus'])->name('keranjang.hapus');
-Route::post('/keranjang/tambah/{id}', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
-Route::post('/keranjang/update/{id}', [KeranjangController::class, 'updateQuantity'])->name('keranjang.update');
-
-// Checkout - Hanya bisa diakses setelah login
-Route::middleware(['auth'])->group(function () {
-    Route::post('/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('keranjang.checkout');
-});
-
-// Halaman lainnya
-Route::view('/tentang', 'tentang')->name('tentang');
-Route::view('/maps', 'maps')->name('maps');
-Route::view('/kontak', 'kontak')->name('kontak');
 
 // AUTH ROUTES
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'showLogin'])->name('login');
