@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Menampilkan daftar akun kasir & admin
-     */
     public function index(Request $request)
     {
         $query = User::query();
@@ -24,22 +21,23 @@ class UserController extends Controller
             });
         }
 
-        // Urutkan akun terbaru
         $users = $query->orderBy('role', 'asc')->orderBy('name', 'asc')->paginate(10);
 
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Menyimpan akun kasir baru
-     */
     public function store(Request $request)
     {
+        // 1. Kasir dilarang menambah akun baru
+        if (!Auth::user()->isOwner()) {
+            return back()->with('error', 'Hanya Owner yang memiliki hak akses untuk menambahkan akun baru.');
+        }
+
         $request->validate([
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users,email',
             'password'  => 'required|string|min:6',
-            'role'      => 'required|in:owner,kasir',
+            'role'      => 'required|in:owner,kasir,pemilik_warung,admin',
             'is_active' => 'required|in:0,1',
         ]);
 
@@ -51,55 +49,69 @@ class UserController extends Controller
             'is_active' => (bool)$request->is_active,
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Akun kasir berhasil dibuat.');
+        return redirect()->route('admin.users.index')->with('success', 'Akun berhasil dibuat.');
     }
 
-    /**
-     * Memperbarui data akun kasir
-     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        $currentUser = Auth::user();
 
-        $request->validate([
+        // 1. Kasir dilarang mengedit akun milik orang lain
+        if (!$currentUser->isOwner() && $currentUser->id !== $user->id) {
+            return back()->with('error', 'Anda tidak memiliki hak akses untuk mengedit akun pengguna lain.');
+        }
+
+        // 2. Validasi: is_active dibuka untuk kasir (shift sendiri) dan owner
+        $rules = [
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users,email,' . $id,
             'password'  => 'nullable|string|min:6',
-            'role'      => 'required|in:owner,kasir',
             'is_active' => 'required|in:0,1',
-        ]);
+        ];
+
+        // 3. Validasi role HANYA jika yang mengedit adalah Owner
+        if ($currentUser->isOwner()) {
+            $rules['role'] = 'required|in:owner,kasir,pemilik_warung,admin';
+        }
+
+        $request->validate($rules);
 
         $data = [
             'name'      => $request->name,
             'email'     => $request->email,
-            'role'      => $request->role,
-            'is_active' => (bool)$request->is_active,
+            'is_active' => (bool)$request->is_active, // Kasir & Owner dapat memperbarui status ini
         ];
 
-        // Hanya ubah kata sandi jika input diisi
+        // 4. Role hanya diubah jika akun yang mengedit adalah Owner
+        if ($currentUser->isOwner()) {
+            $data['role'] = $request->role;
+        }
+
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
 
         $user->update($data);
 
-        return redirect()->route('admin.users.index')->with('success', 'Data akun kasir berhasil diperbarui.');
+        return redirect()->route('admin.users.index')->with('success', 'Data akun dan status shift berhasil diperbarui.');
     }
 
-    /**
-     * Menghapus akun kasir
-     */
     public function destroy($id)
     {
+        // 4. Kasir dilarang menghapus akun siapa pun
+        if (!Auth::user()->isOwner()) {
+            return back()->with('error', 'Hanya Owner yang memiliki wewenang untuk menghapus akun.');
+        }
+
         $user = User::findOrFail($id);
 
-        // Mencegah owner menghapus akun miliknya sendiri
         if ($user->id === Auth::id()) {
             return back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
         }
 
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('success', 'Akun kasir berhasil dihapus.');
+        return redirect()->route('admin.users.index')->with('success', 'Akun berhasil dihapus.');
     }
 }
