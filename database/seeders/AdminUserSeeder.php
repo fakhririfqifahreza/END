@@ -22,12 +22,6 @@ class AdminUserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // Membuat user pelanggan contoh
-        User::create([
-            'name' => 'Pelanggan Demo',
-            'email' => 'pelanggan@cpm.com',
-            'password' => Hash::make('pelanggan123'),
-            'role' => 'pelanggan',
-        ]);
+       
     }
 }

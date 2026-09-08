@@ -464,16 +464,6 @@
         </form>
     </div>
 
-    {{-- Notifikasi sudah ditangani oleh app.blade.php, jadi hapus dari sini --}}
-
-    {{-- Toolbar dengan tombol Tambah Produk dihilangkan --}}
-    {{--
-    <div class="toolbar">
-        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modalTambahProduk">
-            + Tambah Produk
-        </button>
-    </div>
-    --}}
 
 
     {{-- DAFTAR PRODUK --}}
@@ -506,7 +496,7 @@
                                 Rp {{ number_format($item->harga_barang, 0, ',', '.') }}
                             </p>
                         </div>
-                        
+
 
                         @auth
                             <form action="{{ route('keranjang.tambah', ['id' => $item->id_barang]) }}" method="POST" class="mt-auto">
