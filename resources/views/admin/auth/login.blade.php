@@ -10,7 +10,7 @@
             <div class="text-center mb-4">
                 <img src="{{ asset('logo/logo baru.jpeg') }}" alt="Logo CPM" class="logo-img">
                 <h2 class="fw-bold auth-title">Login Admin</h2>
-                <span class="admin-badge">Warung Sembako Cahaya Putri Maulana (CPM)</span>
+                <span class="admin-badge"></span>
             </div>
 
             {{-- ALERT MESSAGES --}}

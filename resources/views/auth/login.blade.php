@@ -9,7 +9,7 @@
                 <div class="text-center mb-4">
                     <img src="{{ asset('logo/logo baru.jpeg') }}" alt="Logo CPM" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 1rem;">
                     <h2 class="fw-bold" style="color: #550000;">Login</h2>
-                    <p class="text-muted">Warung Sembako Cahaya Putri Maulana (CPM)</p>
+                    <p class="text-muted"></p>
                 </div>
 
                 {{-- FORM LOGIN --}}
