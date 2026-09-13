@@ -43,11 +43,12 @@ class ProdukController extends Controller
         }
 
         $request->validate([
-            'nama_barang' => 'required|string|max:255',
-            'harga_barang' => 'required|numeric|min:0',
-            'jumlah_stok' => 'required|numeric|min:0',
-            'satuan' => 'required|string',
-            'gambar_barang' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'nama_barang'    => 'required|string|max:100',
+            'harga_barang'   => 'required|numeric|min:0',
+            'stok_barang'    => 'required',
+            'is_tukar_wadah' => 'nullable|in:0,1',
+            'harga_wadah'    => 'nullable|numeric|min:0',
+            'stok_kosong'    => 'nullable|integer|min:0',
         ]);
 
         $gambarPath = null;
@@ -57,7 +58,14 @@ class ProdukController extends Controller
 
         // Gabungkan angka stok dan satuan, contoh: "50 kg" atau "100 pcs"
         $stokGabung = $request->jumlah_stok . ' ' . $request->satuan;
+        // Persiapkan data
+        $data = $request->only(['nama_barang', 'harga_barang', 'stok_barang']);
+        $data['is_tukar_wadah'] = $request->has('is_tukar_wadah') ? 1 : 0;
+        $data['harga_wadah']    = $request->filled('harga_wadah') ? $request->harga_wadah : 0;
+        $data['stok_kosong']    = $request->filled('stok_kosong') ? $request->stok_kosong : 0;
 
+        // Lakukan create atau update produk
+        $produk->update($data);
         Barang::create([
             'nama_barang' => $request->nama_barang,
             'harga_barang' => $request->harga_barang,

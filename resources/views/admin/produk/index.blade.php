@@ -2,13 +2,27 @@
 
 @section('content')
 <div class="container-fluid px-3 px-md-4 py-3">
+    {{-- ALERT NOTIFIKASI --}}
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-1"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle me-1"></i> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     {{-- HEADER --}}
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <div>
             <h3 class="fw-bold mb-0" style="color: #550000;">
                 <i class="bi bi-box-seam me-2"></i>Kelola Produk & Stok Sembako
             </h3>
-            <small class="text-muted">Kelola harga, nama barang, dan stok satuan warung (kg, liter, pcs, dll)</small>
+            <small class="text-muted">Kelola harga, nama barang, dan stok satuan warung (kg, liter, pcs, tabung, galon)</small>
         </div>
         <a href="{{ route('admin.produk.create') }}" class="btn text-white fw-semibold px-3 py-2" style="background-color: #550000;">
             <i class="bi bi-plus-lg me-1"></i> Tambah Produk
@@ -45,9 +59,9 @@
                             <th style="width: 60px;" class="text-center">No</th>
                             <th style="width: 80px;" class="text-center">Foto</th>
                             <th>Nama Barang</th>
-                            <th>Harga Jual</th>
-                            <th>Sisa Stok & Satuan</th>
-                            <th style="width: 140px;" class="text-center">Aksi</th>
+                            <th>Harga Jual (Isi)</th>
+                            <th style="min-width: 190px;">Sisa Stok & Status Wadah</th>
+                            <th style="width: 130px;" class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,19 +89,32 @@
                                     <div class="fw-bold text-dark">{{ $item->nama_barang }}</div>
                                     <small class="text-muted">ID: #{{ $item->id_barang }}</small>
                                 </td>
-                                <td class="fw-bold text-danger">
-                                    Rp {{ number_format($item->harga_barang, 0, ',', '.') }}
-                                </td>
-                               <td>
-                                <span class="badge {{ $stokAngka > 5 ? 'bg-success' : ($stokAngka > 0 ? 'bg-warning text-dark' : 'bg-danger') }} px-2 py-1">
-                                    Isi: {{ $item->stok_barang }}
-                                </span>
-                                @if($item->is_tukar_wadah)
-                                    <span class="badge bg-warning text-dark px-2 py-1 d-block mt-1" title="Tabung/Galon Kosong">
-                                        <i class="bi bi-arrow-repeat me-1"></i>Kosong: {{ $item->stok_kosong ?? 0 }}
+                                <td>
+                                    <span class="fw-bold text-danger fs-6">
+                                        Rp {{ number_format($item->harga_barang, 0, ',', '.') }}
                                     </span>
-                                @endif
-                            </td>
+                                </td>
+                                <td>
+                                    {{-- KONDISI 1: JIKA PRODUK TUKAR WADAH (GAS/GALON) --}}
+                                    @if($item->is_tukar_wadah)
+                                        <div class="d-flex flex-column gap-1">
+                                            <span class="badge {{ $stokAngka > 5 ? 'bg-success' : ($stokAngka > 0 ? 'bg-warning text-dark' : 'bg-danger') }} px-2 py-1 text-start">
+                                                <i class="bi bi-box-seam me-1"></i>Isi Siap Jual: <strong>{{ $item->stok_barang }}</strong>
+                                            </span>
+                                            <span class="badge bg-warning-subtle text-dark border border-warning-subtle px-2 py-1 text-start" title="Jumlah wadah kosong yang tersedia di warung">
+                                                <i class="bi bi-arrow-repeat me-1"></i>Wadah Kosong: <strong>{{ $item->stok_kosong ?? 0 }} unit</strong>
+                                            </span>
+                                            <small class="text-muted" style="font-size: 0.72rem;">
+                                                <i class="bi bi-tag me-1"></i>Beli Wadah Baru: +Rp {{ number_format($item->harga_wadah ?? 0, 0, ',', '.') }}
+                                            </small>
+                                        </div>
+                                    {{-- KONDISI 2: PRODUK UMUM (SEMBAKO BIASA) --}}
+                                    @else
+                                        <span class="badge {{ $stokAngka > 5 ? 'bg-success' : ($stokAngka > 0 ? 'bg-warning text-dark' : 'bg-danger') }} px-2 py-1">
+                                            {{ $item->stok_barang }}
+                                        </span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-1">
                                         {{-- Tombol Edit --}}
